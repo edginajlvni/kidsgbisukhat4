@@ -42,10 +42,9 @@ class _KelolaBahanState extends State<KelolaBahan> {
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ),
 
-              //input nama kegiatan
-              const SizedBox(height: 20),
-              Container(
-                alignment: Alignment.topCenter,
+              //input nama bulan
+             Container(
+                alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.only(left: 15),
                 child: const Column(
                   children: [

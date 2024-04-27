@@ -1,6 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -151,7 +152,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const DasboardAdmin()));
+                                  builder: (context) => const DashboardPelayan()));
                         },
                         child: Container(
                           height: 50,
