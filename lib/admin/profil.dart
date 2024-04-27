@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/screen/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});

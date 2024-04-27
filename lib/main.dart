@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan_ta/view/splashview.dart';
+import 'package:kidsgbisukhat4/splash.dart';
 
 void main() {
   runApp(const MyApp());

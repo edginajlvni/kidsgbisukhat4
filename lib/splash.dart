@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan_ta/screen/loginscreen.dart';
+import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});

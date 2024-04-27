@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:latihan_ta/fitur%20pelayan/dashboard.dart';
-import 'package:latihan_ta/screen/homescreen.dart';
+import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -46,7 +45,6 @@ class _LogInScreenState extends State<LogInScreen> {
                             style: TextStyle(
                               fontSize: 25,
                               color: Colors.white,
-                              fontFamily: "Ruluko",
                             ),
                           ),
                         ),
@@ -81,16 +79,11 @@ class _LogInScreenState extends State<LogInScreen> {
               Container(
                 width: 500,
                 margin: const EdgeInsets.symmetric(horizontal: 20),
-
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(211, 235, 233, 233),
                     borderRadius: BorderRadius.circular(20)),
-
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 75),
-                // decoration:
-                // const BoxDecoration(color: Color.fromARGB(132, 255, 255, 255)),
-
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -158,7 +151,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                                  builder: (context) => const DasboardAdmin()));
                         },
                         child: Container(
                           height: 50,
