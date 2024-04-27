@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
-class Profil extends StatefulWidget {
-  const Profil({super.key});
+class ProfilPelayan extends StatefulWidget {
+  const ProfilPelayan({super.key});
 
   @override
-  State<Profil> createState() => _ProfilState();
+  State<ProfilPelayan> createState() => _ProfilPelayanState();
 }
 
-class _ProfilState extends State<Profil> {
-  @override
+class _ProfilPelayanState extends State<ProfilPelayan> {
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -28,7 +28,7 @@ class _ProfilState extends State<Profil> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DasboardAdmin()));
+                                builder: (context) => const DashboardPelayan()));
                       },
                       child: const Icon(Icons.arrow_back_outlined),
                     ),
@@ -58,9 +58,24 @@ class _ProfilState extends State<Profil> {
                   Padding(
                     padding: EdgeInsets.all(20),
                     child: Text(
-                      "Admin",
+                      "Edgina Juliviani",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    "Guru Kelas Besar",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                   Text(
+                    "15001",
+                    style: TextStyle(
+                      fontSize: 14,
                     ),
                   ),
                 ],

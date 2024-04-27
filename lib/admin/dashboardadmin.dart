@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/buatberita.dart';
 import 'package:kidsgbisukhat4/admin/buatjadwal.dart';
+import 'package:kidsgbisukhat4/admin/daftarizin.dart';
 import 'package:kidsgbisukhat4/admin/datapelayan.dart';
-import 'package:kidsgbisukhat4/admin/profil.dart';
+import 'package:kidsgbisukhat4/admin/kelolabahan.dart';
+import 'package:kidsgbisukhat4/admin/profiladmin.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 
 class DasboardAdmin extends StatefulWidget {
@@ -33,7 +35,7 @@ class _DasboardAdmin extends State<DasboardAdmin> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Profil()));
+                            builder: (context) => const ProfilAdmin()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -114,8 +116,10 @@ class _DasboardAdmin extends State<DasboardAdmin> {
                 padding: const EdgeInsets.only(left: 15),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const BuatJadwal()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BuatJadwal()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -213,14 +217,6 @@ class _DasboardAdmin extends State<DasboardAdmin> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(90),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: const Color.fromARGB(255, 253, 238, 255),
-                        //     spreadRadius: 1,
-                        //     blurRadius: 8,
-                        //     offset: Offset(4,4),
-                        //   ),
-                        // ]
                       ),
                       child: const Center(
                         child: Text("Keluar",
@@ -233,29 +229,6 @@ class _DasboardAdmin extends State<DasboardAdmin> {
                   ),
                 ),
               ),
-
-              // const SizedBox(height: 20),
-              // Padding(
-              //   padding: EdgeInsets.only(top: 50),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: <Widget>[
-              //       InkWell(
-              //         onTap: () {
-              //        setState(() {
-              //          darkMode = false;
-              //        });
-              //         },
-              //         child: Text(
-              //           "Dark",
-              //           style: TextStyle(
-              //             color: Colors.amber,
-              //           ),
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),

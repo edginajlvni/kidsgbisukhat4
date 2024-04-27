@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/pelayan/profilpelayan.dart';
 
 class BuatJadwal extends StatefulWidget {
   const BuatJadwal({super.key});
@@ -49,7 +50,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Profil()));
+                            builder: (context) => const ProfilPelayan()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -78,7 +79,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Profil()));
+                            builder: (context) => const ProfilPelayan()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -107,7 +108,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Profil()));
+                            builder: (context) => const ProfilPelayan()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -136,7 +137,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Profil()));
+                            builder: (context) => const ProfilPelayan()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -165,7 +166,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Profil()));
+                            builder: (context) => const ProfilPelayan()));
                   },
                   child: Container(
                     width: double.infinity,
