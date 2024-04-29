@@ -28,7 +28,7 @@ class _ProfilAdmin extends State<ProfilAdmin> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DasboardAdmin()));
+                                builder: (context) => const DashboardAdmin()));
                       },
                       child: const Icon(Icons.arrow_back_outlined),
                     ),

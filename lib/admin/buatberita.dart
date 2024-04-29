@@ -28,7 +28,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DasboardAdmin()));
+                                builder: (context) => const DashboardAdmin()));
                       },
                       child: const Icon(Icons.arrow_back_outlined),
                     ),
@@ -167,7 +167,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const DasboardAdmin()));
+                                          const DashboardAdmin()));
                             },
                             child: const Text(
                               'Kembali',

@@ -29,7 +29,7 @@ class _DaftarIzinState extends State<DaftarIzin> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DasboardAdmin()));
+                                builder: (context) => const DashboardAdmin()));
                       },
                       child: const Icon(Icons.arrow_back_outlined),
                     ),

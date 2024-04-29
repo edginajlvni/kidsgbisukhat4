@@ -1,6 +1,6 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
+import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -144,13 +144,22 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                     const SizedBox(height: 50),
                     InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        _focusEmail.unfocus();
+                        _focusPassword.unfocus();
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                        }
+                      },
                       child: MaterialButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const DashboardPelayan()));
+                                  builder: (context) =>
+                                      const DashboardAdmin()));
                         },
                         child: Container(
                           height: 50,

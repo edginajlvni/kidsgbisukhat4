@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/admin/tambahpelayan.dart';
 
 class DataPelayan extends StatefulWidget {
   const DataPelayan({super.key});
@@ -31,26 +33,45 @@ class _DataPelayanState extends State<DataPelayan> {
       // backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
+          padding: const EdgeInsets.only(left: 5, right: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DasboardAdmin()));
-                      },
-                      child: const Icon(Icons.arrow_back_outlined),
+              Padding(
+                padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DashboardAdmin()));
+                        },
+                        child: const Icon(Icons.arrow_back_outlined),
+                      ),
                     ),
-                  ),
-                ],
+                    Center(
+                      child: InkWell(
+                        onTap: () {},
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TambahDataPelayan()));
+                          },
+                          child: const Icon(Icons.add),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
               const SizedBox(height: 10),
               const Center(

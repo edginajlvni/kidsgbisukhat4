@@ -7,14 +7,14 @@ import 'package:kidsgbisukhat4/admin/kelolabahan.dart';
 import 'package:kidsgbisukhat4/admin/profiladmin.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 
-class DasboardAdmin extends StatefulWidget {
-  const DasboardAdmin({super.key});
+class DashboardAdmin extends StatefulWidget {
+  const DashboardAdmin({super.key});
 
   @override
-  State<DasboardAdmin> createState() => _DasboardAdmin();
+  State<DashboardAdmin> createState() => _DashboardAdmin();
 }
 
-class _DasboardAdmin extends State<DasboardAdmin> {
+class _DashboardAdmin extends State<DashboardAdmin> {
   bool darkMode = true;
 
   @override

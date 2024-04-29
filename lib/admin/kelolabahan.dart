@@ -28,7 +28,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DasboardAdmin()));
+                                builder: (context) => const DashboardAdmin()));
                       },
                       child: const Icon(Icons.arrow_back_outlined),
                     ),
@@ -166,7 +166,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const DasboardAdmin()));
+                                          const DashboardAdmin()));
                             },
                             child: const Text(
                               'Kembali',
