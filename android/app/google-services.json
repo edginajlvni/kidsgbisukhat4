@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850745654380",
+    "project_id": "kidsgbisukhat4",
+    "storage_bucket": "kidsgbisukhat4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850745654380:android:8384623a60ba52a536ec49",
+        "android_client_info": {
+          "package_name": "com.example.kidsgbisukhat4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFi0OOucperMu9twK_4Qfxg5CaEhUkAs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

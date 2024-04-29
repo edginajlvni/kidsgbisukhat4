@@ -22,7 +22,7 @@ class _DataPelayanState extends State<DataPelayan> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: () {},
         child: const Icon(
           Icons.add,
           color: Colors.black,
@@ -239,18 +239,19 @@ class _DataPelayanState extends State<DataPelayan> {
     );
   }
 
-  // Future createOrUpdate({UserModel? user}) async {
-  //   String action = 'create';
+//   Future createOrUpdate({UserModel? user}) async {
+//     String action = 'create';
 
-  //   if (user != null) {
-  //     action = 'update';
-  //     _nameController.text = user.name!;
-  //     _emailController.text = user.email!;
+//     if (user != null) {
+//       action = 'update';
+//       _nameController.text = user.name!;
+//       _emailController.text = user.email!;
 
-  //     _tanggalLahirController.text = DateFormat('EEEE, dd-MMM-yyyy', 'id_ID')
-  //         .format(user.tanggalLahir!.toDate());
-  //     _passwordController.text = user.password!;
-  //     _dateTime = user.tanggalLahir!.toDate();
-  //   }
-  // }
+//        _tanggalLahirController.text = DateFormat('dd MMMM yyyy').format(date);
+
+//       _passwordController.text = user.password!;
+//       _dateTime = user.tanggalLahir!.toDate();
+//     }
+//   }
+// }
 }

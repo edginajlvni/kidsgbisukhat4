@@ -1,6 +1,5 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -24,7 +23,6 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -45,7 +43,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 25,
-                              color: Colors.white,
+                              color: Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
                         ),
@@ -66,7 +64,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Silakan Login",
-                            style: TextStyle(fontSize: 15, color: Colors.white),
+                            style: TextStyle(fontSize: 15, color: Colors.black),
                           ),
                         ),
                       ],
@@ -81,7 +79,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 width: 500,
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                    color: const Color.fromARGB(211, 235, 233, 233),
+                    color: const Color.fromARGB(210, 0, 0, 0),
                     borderRadius: BorderRadius.circular(20)),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 75),
