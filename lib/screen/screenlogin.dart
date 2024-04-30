@@ -1,25 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
-import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+class ScreenLogin extends StatefulWidget {
+  const ScreenLogin({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<ScreenLogin> createState() => _ScreenLogin();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _ScreenLogin extends State<ScreenLogin> {
   final _formKey = GlobalKey<FormState>();
+  // final _auth = FirebaseAuth.instance;
 
-  bool visible = false;
-
-  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
+  bool isLoading = false;
+  final _focusEmail = FocusNode();
+  final _focusPassword = FocusNode();
   bool _isSecurePassword = true;
 
   @override
@@ -41,7 +39,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Halo,",
+                            "Shallom,",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 25,
@@ -93,14 +91,14 @@ class _LogInScreenState extends State<LogInScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
                     TextFormField(
+                      focusNode: _focusEmail,
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
+                            borderSide: BorderSide(color: Colors.white)),
                         prefixIcon: Icon(
                           Icons.people,
                           color: Colors.white,
@@ -114,26 +112,13 @@ class _LogInScreenState extends State<LogInScreen> {
                               fontSize: 16),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Email cannot be empty";
-                        }
-                        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                            .hasMatch(value)) {
-                          return ("Please enter a valid email");
-                        } else {
-                          return null;
-                        }
-                      },
-                      onSaved: (value) {
-                        _emailController.text = value!;
-                      },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                     TextFormField(
                       controller: _passwordController,
+                      focusNode: _focusPassword,
                       obscureText: _isSecurePassword,
                       decoration: InputDecoration(
                         enabledBorder: const UnderlineInputBorder(
@@ -153,48 +138,41 @@ class _LogInScreenState extends State<LogInScreen> {
                               color: Color.fromARGB(255, 255, 255, 255)),
                         ),
                       ),
-                      validator: (value) {
-                        RegExp regex = RegExp(r'^.{6,}$');
-                        if (value!.isEmpty) {
-                          return "Password cannot be empty";
-                        }
-                        if (!regex.hasMatch(value)) {
-                          return ("please enter valid password min. 6 character");
-                        } else {
-                          return null;
-                        }
-                      },
-                      onSaved: (value) {
-                        _passwordController.text = value!;
-                      },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                     const SizedBox(height: 50),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      elevation: 5.0,
-                      height: 40,
-                      onPressed: () {
-                        setState(() {
-                          visible = true;
-                        });
-                        signIn(_emailController.text, _passwordController.text);
+                    InkWell(
+                      onTap: () async {
+                        _focusEmail.unfocus();
+                        _focusPassword.unfocus();
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                        }
                       },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(100)),
-                        child: const Center(
-                          child: Text("Log In",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                              )),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DashboardAdmin()));
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(100)),
+                          child: const Center(
+                            child: Text("Log In",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                )),
+                          ),
                         ),
                       ),
                     ),
@@ -220,53 +198,5 @@ class _LogInScreenState extends State<LogInScreen> {
           : const Icon(Icons.visibility_off),
       color: Colors.white,
     );
-  }
-
-  void route() {
-    User? user = FirebaseAuth.instance.currentUser;
-    var a = FirebaseFirestore.instance
-        .collection('users')
-        .doc(user!.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        if (documentSnapshot.get('role') == "Admin") {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DashboardAdmin(),
-            ),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DashboardPelayan(),
-            ),
-          );
-        }
-      } else {
-        print('Document does not exist on the database');
-      }
-    });
-  }
-
-  void signIn(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        route();
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          print('No user found for that email.');
-        } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
-        }
-      }
-    }
   }
 }
