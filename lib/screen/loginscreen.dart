@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
@@ -16,7 +17,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   bool visible = false;
 
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -173,7 +174,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                     const SizedBox(height: 50),
                     MaterialButton(
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
                       elevation: 5.0,
@@ -224,24 +225,24 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void route() {
     User? user = FirebaseAuth.instance.currentUser;
-    var a = FirebaseFirestore.instance
-        .collection('users')
+    FirebaseFirestore.instance
+        .collection('admin')
         .doc(user!.uid)
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        if (documentSnapshot.get('role') == "Admin") {
+        if (documentSnapshot.get('jabatan') == "Guru") {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardAdmin(),
+              builder: (context) => DashboardPelayan(),
             ),
           );
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardPelayan(),
+              builder: (context) => DashboardAdmin(),
             ),
           );
         }
@@ -254,11 +255,6 @@ class _LogInScreenState extends State<LogInScreen> {
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
         route();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:kidsgbisukhat4/splash.dart';
 
 void main() async {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(

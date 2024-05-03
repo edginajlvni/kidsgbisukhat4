@@ -44,51 +44,48 @@ class _DashboardPelayanState extends State<DashboardPelayan> {
                       color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Row(
-                       
+                    child: Row(children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: Image.asset(
+                          "assets/images/profill.webp",
+                          width: 80,
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.asset(
-                              
-                              "assets/images/profill.webp",
-                              width: 80,
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              "Shallom",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 0, 0, 0)),
                             ),
                           ),
-                          const SizedBox(width: 15),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 5),
-                                child: Text(
-                                  "Shallom",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 0, 0, 0)),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 5),
-                                child: Text(
-                                  "Edgina Juliviani",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 0, 0, 0)),
-                                ),
-                              ),
-                              Text(
-                                "Guru Kelas Besar ",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                              ),
-                            ],
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              "Edgina Juliviani",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                            ),
                           ),
-                        ]),
+                          Text(
+                            "Guru Kelas Besar ",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                          ),
+                        ],
+                      ),
+                    ]),
                   ),
                 ),
               ),
@@ -279,7 +276,6 @@ class _DashboardPelayanState extends State<DashboardPelayan> {
                             ),
                           ),
                         ]),
-
 
                         const SizedBox(width: 10),
                         Column(children: [

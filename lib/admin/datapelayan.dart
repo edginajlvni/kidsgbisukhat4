@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/admin/tambahpelayan.dart';
+import 'package:kidsgbisukhat4/screen/register.dart';
 
 class DataPelayan extends StatefulWidget {
   const DataPelayan({super.key});
