@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/screen/loginpage.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 import 'package:kidsgbisukhat4/screen/signin.dart';
 
@@ -26,17 +25,11 @@ class _RegisterState extends State<Register> {
   final TextEditingController confirmpassController = TextEditingController();
   final TextEditingController name = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-   final TextEditingController jabatanController = TextEditingController();
-  final TextEditingController mobile = TextEditingController();
+  final TextEditingController jabatanController = TextEditingController();
   bool _isObscure = true;
   bool _isObscure2 = true;
   File? file;
-  // var options = [
-  //   'Admin',
-  //   'Guru',
-  // ];
-  // var _currentItemSelected = "Guru";
-  // var role = "Guru";
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +44,7 @@ class _RegisterState extends State<Register> {
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.all(12),
+                  margin: const EdgeInsets.all(12),
                   child: Form(
                     key: _formkey,
                     child: Column(
@@ -89,12 +82,12 @@ class _RegisterState extends State<Register> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           validator: (value) {
-                            if (value!.length == 0) {
+                            if (value!.isEmpty) {
                               return "Email cannot be empty";
                             }
                             if (!RegExp(
@@ -218,53 +211,13 @@ class _RegisterState extends State<Register> {
                             if (value!.length == 0) {
                               return "Harap diisi";
                             }
+                            return null;
                           },
                           onChanged: (value) {},
-                          keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     const Text(
-                        //       "Role : ",
-                        //       style: TextStyle(
-                        //         fontSize: 20,
-                        //         fontWeight: FontWeight.bold,
-                        //         color: Colors.white,
-                        //       ),
-                        //     ),
-                        //     DropdownButton<String>(
-                        //       dropdownColor: Colors.blue[900],
-                        //       isDense: true,
-                        //       isExpanded: false,
-                        //       iconEnabledColor: Colors.white,
-                        //       focusColor: Colors.white,
-                        //       items: options.map((String dropDownStringItem) {
-                        //         return DropdownMenuItem<String>(
-                        //           value: dropDownStringItem,
-                        //           child: Text(
-                        //             dropDownStringItem,
-                        //             style: const TextStyle(
-                        //               color: Colors.white,
-                        //               fontWeight: FontWeight.bold,
-                        //               fontSize: 20,
-                        //             ),
-                        //           ),
-                        //         );
-                        //       }).toList(),
-                        //       onChanged: (newValueSelected) {
-                        //         setState(() {
-                        //           _currentItemSelected = newValueSelected!;
-                        //           role = newValueSelected;
-                        //         });
-                        //       },
-                        //       value: _currentItemSelected,
-                        //     ),
-                        //   ],
-                        // ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -305,8 +258,10 @@ class _RegisterState extends State<Register> {
                                 setState(() {
                                   showProgress = true;
                                 });
-                                signUp(emailController.text,
-                                    passwordController.text, jabatanController.text);
+                                signUp(
+                                    emailController.text,
+                                    passwordController.text,
+                                    jabatanController.text);
                               },
                               child: Text(
                                 "Register",
@@ -330,12 +285,12 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void signUp(String email, String password, String role) async {
+  void signUp(String email, String password, String jabatan) async {
     CircularProgressIndicator();
     if (_formkey.currentState!.validate()) {
       await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore(email, role)})
+          .createUserWithEmailAndPassword(email: email, password: password, jabatan: jabatan)
+          .then((value) => {postDetailsToFirestore(email, jabatan)})
           .catchError((e) {});
     }
   }

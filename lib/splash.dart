@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/admin/tambah.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -10,7 +10,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 1), () {
-      Get.to(const DashboardAdmin());
+      Get.to(AddStudentPage());
     });
     return const Scaffold(
       backgroundColor: Color.fromARGB(255, 245, 190, 255),

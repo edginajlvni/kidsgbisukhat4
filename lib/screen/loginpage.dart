@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Visibility(

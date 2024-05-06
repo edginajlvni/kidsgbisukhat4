@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+//import 'package:flutter/widgets.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/admin/tambah.dart';
 import 'package:kidsgbisukhat4/admin/tambahpelayan.dart';
-import 'package:kidsgbisukhat4/screen/register.dart';
 
 class DataPelayan extends StatefulWidget {
   const DataPelayan({super.key});
@@ -12,11 +12,11 @@ class DataPelayan extends StatefulWidget {
 }
 
 class _DataPelayanState extends State<DataPelayan> {
-  final _tanggalLahirController = TextEditingController();
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  DateTime? _dateTime;
+  final tanggalLahirController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  DateTime? dateTime;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isLoadingSave = false;

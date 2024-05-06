@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kidsgbisukhat4/admin/tambah.dart';
 import 'package:kidsgbisukhat4/splash.dart';
 
 void main() async {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(),
-      home: const Splash(),
+      home:  AddStudentPage(),
     );
   }
 }
