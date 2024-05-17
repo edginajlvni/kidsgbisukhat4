@@ -35,36 +35,6 @@ class _ProfilAdmin extends State<ProfilAdmin> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      "PROFIL ANDA",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  CircleAvatar(
-                    radius: 70,
-                    backgroundImage: AssetImage("assets/images/profill.webp"),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      "Admin",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),
@@ -72,3 +42,35 @@ class _ProfilAdmin extends State<ProfilAdmin> {
     );
   }
 }
+
+
+// const SizedBox(
+              //   height: 10,
+              // ),
+              // const Column(
+              //   children: [
+              //     Padding(
+              //       padding: EdgeInsets.all(20),
+              //       child: Text(
+              //         "PROFIL ANDA",
+              //         style:
+              //             TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              //       ),
+              //     ),
+              //     CircleAvatar(
+              //       radius: 70,
+              //       backgroundImage: AssetImage("assets/images/profill.webp"),
+              //     ),
+              //     SizedBox(
+              //       height: 20,
+              //     ),
+              //     Padding(
+              //       padding: EdgeInsets.all(20),
+              //       child: Text(
+              //         "Admin",
+              //         style:
+              //             TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              //       ),
+              //     ),
+              //   ],
+              // ),

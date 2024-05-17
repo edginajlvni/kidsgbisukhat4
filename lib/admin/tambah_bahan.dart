@@ -1,74 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/Berita/my_firebase.dart';
-import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 
-class BuatBerita extends StatefulWidget {
-  const BuatBerita({super.key});
+class Tambah_Bahan extends StatefulWidget {
+  const Tambah_Bahan({super.key});
 
   @override
-  State<BuatBerita> createState() => _BuatBeritaState();
+  State<Tambah_Bahan> createState() => _Tambah_BahanState();
 }
 
-class _BuatBeritaState extends State<BuatBerita> {
-  final namakegiatanController = TextEditingController();
-  final waktuController = TextEditingController();
+class _Tambah_BahanState extends State<Tambah_Bahan> {
+  final bulanController = TextEditingController();
+  final bahanController = TextEditingController();
   final keteranganController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  var namakegiatan = "";
-  var waktu = "";
+  var bulan = "";
+  var bahan = "";
   var keterangan = "";
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    namakegiatanController.dispose();
-    waktuController.dispose();
+    bulanController.dispose();
+    bahanController.dispose();
     keteranganController.dispose();
     super.dispose();
   }
 
   clearText() {
-    namakegiatanController.clear();
-    waktuController.clear();
+    bulanController.clear();
+    bahanController.clear();
     keteranganController.clear();
   }
 
-//tambah berita
-  CollectionReference berita = FirebaseFirestore.instance.collection('berita');
-
-  void addBerita() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        await MyFirebase.contactsCollection.add({
-          'nama': namakegiatanController.text.trim(),
-          'waktu': waktuController.text.trim(),
-          'keterangan': keteranganController.text.trim(),
-        });
-        Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const DashboardAdmin()));
-      } on FirebaseException {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Failed to add contact'),
-            backgroundColor: Colors.red[300],
-          ),
-        );
-      }
-    } else {
-      // show snackbar
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please fill all the fields'),
-          backgroundColor: Colors.red[300],
-        ),
-      );
-    }
+  // Adding Student
+  CollectionReference students = FirebaseFirestore.instance.collection('bahan');
+  Future<void> addBahan() {
+    return students
+        .add({'bulan': bulan, 'bahan': bahan, 'keterangan': keterangan})
+        .then((value) => print('Bahan Added'))
+        .catchError((error) => print('Failed to Add bahan: $error'));
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +49,7 @@ class _BuatBeritaState extends State<BuatBerita> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text("Tambah Berita",
+        title: const Text("Tambah Bahan",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
@@ -96,7 +69,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                   child: const Column(
                     children: [
                       Text(
-                        "Nama Kegiatan",
+                        "Bulan",
                         style: TextStyle(
                           fontSize: 15,
                           color: Color.fromARGB(255, 12, 12, 12),
@@ -113,9 +86,8 @@ class _BuatBeritaState extends State<BuatBerita> {
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 15),
                   child: TextFormField(
-                    controller: namakegiatanController,
+                    controller: bulanController,
                     decoration: const InputDecoration(
-                      hintText: 'eg. Ultah cabang Sukhat 4',
                       border: OutlineInputBorder(
                         // borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.black),
@@ -135,7 +107,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                   ),
                 ),
 
-                //waktu
+                //input link bahan
                 const SizedBox(height: 20),
                 Container(
                   alignment: Alignment.centerLeft,
@@ -143,7 +115,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                   child: const Column(
                     children: [
                       Text(
-                        "Waktu Kegiatan",
+                        "Link Bahan",
                         style: TextStyle(
                           fontSize: 15,
                           color: Color.fromARGB(255, 12, 12, 12),
@@ -160,9 +132,8 @@ class _BuatBeritaState extends State<BuatBerita> {
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 15),
                   child: TextFormField(
-                    controller: waktuController,
+                    controller: bahanController,
                     decoration: const InputDecoration(
-                        hintText: 'diisi hari, tgl kegiatan',
                         border: OutlineInputBorder(
                           // borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(color: Colors.black),
@@ -207,7 +178,6 @@ class _BuatBeritaState extends State<BuatBerita> {
                   child: TextFormField(
                     controller: keteranganController,
                     decoration: const InputDecoration(
-                        hintText: 'detail keg. spt jam ibadah / lainnya',
                         border: OutlineInputBorder(
                           // borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(color: Colors.black),
@@ -224,6 +194,7 @@ class _BuatBeritaState extends State<BuatBerita> {
                     onChanged: (value) {},
                   ),
                 ),
+
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -234,8 +205,13 @@ class _BuatBeritaState extends State<BuatBerita> {
                         child: MaterialButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              addBerita();
-                              clearText();
+                              setState(() {
+                                bulan = bulanController.text;
+                                bahan = bahanController.text;
+                                keterangan = keteranganController.text;
+                                addBahan();
+                                clearText();
+                              });
                             }
                           },
                           child: Center(

@@ -1,25 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/edit_data.dart';
-import 'package:kidsgbisukhat4/admin/tambah_bahan.dart';
+import 'package:kidsgbisukhat4/admin/buatberita.dart';
+import 'package:kidsgbisukhat4/admin/edit_berita.dart';
 
-class KelolaBahan extends StatefulWidget {
-  const KelolaBahan({super.key});
+class Kelola_Berita extends StatefulWidget {
+  const Kelola_Berita({super.key});
 
   @override
-  State<KelolaBahan> createState() => _KelolaBahanState();
+  State<Kelola_Berita> createState() => _Kelola_BeritaState();
 }
 
-class _KelolaBahanState extends State<KelolaBahan> {
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('bahan').snapshots();
+class _Kelola_BeritaState extends State<Kelola_Berita> {
+  final Stream<QuerySnapshot> _beritaStream =
+      FirebaseFirestore.instance.collection('berita').snapshots();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Bahan Mengajar",
+        title: const Text("Daftar Berita",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
@@ -27,7 +27,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Tambah_Bahan()),
+            MaterialPageRoute(builder: (context) => const BuatBerita()),
           );
         },
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -37,7 +37,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
         ),
       ),
       body: StreamBuilder(
-          stream: _usersStream,
+          stream: _beritaStream,
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
@@ -61,7 +61,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
                           context,
                           MaterialPageRoute(
                             builder: (_) =>
-                                EditData(docid: snapshot.data!.docs[index]),
+                                EditBerita(docid: snapshot.data!.docs[index]),
                           ),
                         );
                       },
@@ -87,25 +87,24 @@ class _KelolaBahanState extends State<KelolaBahan> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                     ),
-                                    const SizedBox(height: 10),
                                     Text(
-                                      "Email: " +
+                                      "Judul: " +
                                           snapshot.data!.docChanges[index]
-                                              .doc['bahan'],
+                                              .doc['nama'],
                                       style: const TextStyle(
                                         fontSize: 15,
                                       ),
                                     ),
                                     Text(
-                                      "Jabatan: " +
+                                      "Waktu Kegiatan: " +
                                           snapshot.data!.docChanges[index]
-                                              .doc['bulan'],
+                                              .doc['waktu'],
                                       style: const TextStyle(
                                         fontSize: 15,
                                       ),
                                     ),
                                     Text(
-                                      "Password: " +
+                                      "Keterangan: " +
                                           snapshot.data!.docChanges[index]
                                               .doc['keterangan'],
                                       style: const TextStyle(

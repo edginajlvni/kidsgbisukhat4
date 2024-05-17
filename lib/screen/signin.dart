@@ -218,7 +218,7 @@ class _SigninPageState extends State<SignIn> {
   void route() {
     User? user = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance
-        .collection('admin')
+        .collection('user')
         .doc(user!.uid)
         .get()
         .then((DocumentSnapshot documentSnapshot) {

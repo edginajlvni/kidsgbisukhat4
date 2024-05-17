@@ -1,25 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/edit_data.dart';
-import 'package:kidsgbisukhat4/admin/tambah_bahan.dart';
+import 'package:kidsgbisukhat4/admin/tambahpelayan.dart';
 
-class KelolaBahan extends StatefulWidget {
-  const KelolaBahan({super.key});
+class Kelola_Data extends StatefulWidget {
+  const Kelola_Data({super.key});
 
   @override
-  State<KelolaBahan> createState() => _KelolaBahanState();
+  State<Kelola_Data> createState() => _Kelola_DataState();
 }
 
-class _KelolaBahanState extends State<KelolaBahan> {
+class _Kelola_DataState extends State<Kelola_Data> {
   final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('bahan').snapshots();
+      FirebaseFirestore.instance.collection('users').snapshots();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Bahan Mengajar",
+        title: const Text("DATA PELAYAN",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
@@ -27,7 +27,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Tambah_Bahan()),
+            MaterialPageRoute(builder: (context) => const TambahDataPelayan()),
           );
         },
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -67,7 +67,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
                       },
                       child: Padding(
                         padding:
-                            const EdgeInsets.only(top: 10, left: 15, right: 15),
+                            const EdgeInsets.only(top: 15, left: 15, right: 15),
                         child: Column(
                           children: [
                             Material(
@@ -78,7 +78,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     color: const Color.fromARGB(
-                                        255, 255, 255, 255),
+                                        255, 238, 238, 238),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,12 +86,13 @@ class _KelolaBahanState extends State<KelolaBahan> {
                                     const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      children: [],
                                     ),
                                     const SizedBox(height: 10),
                                     Text(
                                       "Email: " +
                                           snapshot.data!.docChanges[index]
-                                              .doc['bahan'],
+                                              .doc['email'],
                                       style: const TextStyle(
                                         fontSize: 15,
                                       ),
@@ -99,7 +100,7 @@ class _KelolaBahanState extends State<KelolaBahan> {
                                     Text(
                                       "Jabatan: " +
                                           snapshot.data!.docChanges[index]
-                                              .doc['bulan'],
+                                              .doc['jabatan'],
                                       style: const TextStyle(
                                         fontSize: 15,
                                       ),
@@ -107,11 +108,12 @@ class _KelolaBahanState extends State<KelolaBahan> {
                                     Text(
                                       "Password: " +
                                           snapshot.data!.docChanges[index]
-                                              .doc['keterangan'],
+                                              .doc['password'],
                                       style: const TextStyle(
                                         fontSize: 15,
                                       ),
                                     ),
+                                    const SizedBox(height: 10),
                                   ],
                                 ),
                               ),

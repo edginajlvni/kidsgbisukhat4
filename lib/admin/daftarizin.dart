@@ -9,42 +9,22 @@ class DaftarIzin extends StatefulWidget {
 }
 
 class _DaftarIzinState extends State<DaftarIzin> {
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text("DAFTAR IZIN",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DashboardAdmin()));
-                      },
-                      child: const Icon(Icons.arrow_back_outlined),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              const Center(
-                child: Text("DAFTAR IZIN",
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Container(

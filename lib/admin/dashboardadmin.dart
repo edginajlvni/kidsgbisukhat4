@@ -3,6 +3,7 @@ import 'package:kidsgbisukhat4/admin/buatberita.dart';
 import 'package:kidsgbisukhat4/admin/buatjadwal.dart';
 import 'package:kidsgbisukhat4/admin/daftarizin.dart';
 import 'package:kidsgbisukhat4/admin/datapelayan.dart';
+import 'package:kidsgbisukhat4/admin/kelola_berita.dart';
 import 'package:kidsgbisukhat4/admin/kelolabahan.dart';
 import 'package:kidsgbisukhat4/admin/profiladmin.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
@@ -15,8 +16,6 @@ class DashboardAdmin extends StatefulWidget {
 }
 
 class _DashboardAdmin extends State<DashboardAdmin> {
-  bool darkMode = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +141,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const BuatBerita()));
+                            builder: (context) => const Kelola_Berita()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -212,8 +211,8 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   },
                   child: Center(
                     child: Container(
-                      height: 50,
-                      width: 120,
+                      height: 30,
+                      width: 110,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(90),
@@ -222,7 +221,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                         child: Text("Keluar",
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold)),
                       ),
                     ),
@@ -255,7 +254,7 @@ Future<void> _showExitConfirmationDialog(BuildContext context) async {
           TextButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LogInScreen()));
+                  MaterialPageRoute(builder: (context) => LogInScreen()));
             },
             child: const Text('Ya'),
           ),

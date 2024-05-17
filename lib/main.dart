@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kidsgbisukhat4/splash.dart';
+import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,8 +13,7 @@ void main() async {
           storageBucket: "kidsgbisukhat4.appspot.com",
           messagingSenderId: "850745654380",
           appId: "1:850745654380:web:be2b64effbc2501a36ec49",
-          measurementId: "G-T97WJHRDCR")
-          );
+          measurementId: "G-T97WJHRDCR"));
   runApp(const MyApp());
 }
 
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(),
-      home: const Splash(),
+      home: const DashboardAdmin(),
     );
   }
 }

@@ -1,44 +1,37 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
-import 'package:kidsgbisukhat4/admin/datapelayan.dart';
 
-class TambahDataPelayan extends StatefulWidget {
-  const TambahDataPelayan({super.key});
-
+class tambah_data extends StatefulWidget {
   @override
-  _TambahDataPelayan createState() => _TambahDataPelayan();
+  State<tambah_data> createState() => _tambah_dataState();
 }
 
-class _TambahDataPelayan extends State<TambahDataPelayan> {
-  _TambahDataPelayan();
+class _tambah_dataState extends State<tambah_data> {
+  TextEditingController nama = TextEditingController();
+
+  TextEditingController jabatan = TextEditingController();
+
+  TextEditingController email = TextEditingController();
+
+  TextEditingController password = TextEditingController();
 
   bool showProgress = false;
+
   bool visible = false;
 
   final _formKey = GlobalKey<FormState>();
+
   final auth = FirebaseAuth.instance;
 
-   TextEditingController email = TextEditingController();
-   TextEditingController password = TextEditingController();
-   TextEditingController nama = TextEditingController();
-   TextEditingController jabatan = TextEditingController();
-
   bool _isObscure = true;
+
   File? file;
 
   @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    nama.dispose();
-    email.dispose();
-    password.dispose();
-    jabatan.dispose();
-    super.dispose();
-  }
-
   clearText() {
     nama.clear();
     email.clear();
@@ -52,7 +45,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
-        title: const Text("Tambah Data Pelayan",
+        title: const Text("TAMBAH DATA PELAYAN",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
@@ -269,7 +262,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
 
   void signUp(
       String email, String password, String jabatan, String nama) async {
-    const CircularProgressIndicator();
+    CircularProgressIndicator();
     if (_formKey.currentState!.validate()) {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -292,6 +285,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
       'nama': nama,
     });
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const DashboardAdmin()));
+        MaterialPageRoute(builder: (context) => const DashboardAdmin()
+        ),);
   }
 }

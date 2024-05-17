@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     if (role == 'user') {
-      navigateNext(const DashboardPelayan());
+      navigateNext( DashboardPelayan());
     } else if (role == 'admin') {
       navigateNext(const DashboardAdmin());
     }

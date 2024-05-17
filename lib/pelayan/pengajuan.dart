@@ -9,38 +9,22 @@ class Pengajuan extends StatefulWidget {
 }
 
 class _PengajuanState extends State<Pengajuan> {
- // final _tglIzinController = TextEditingController();
+  // final _tglIzinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text("PENGAJUAN IZIN",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
+          padding: const EdgeInsets.only(top: 20, left: 5, right: 20),
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: MaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DashboardPelayan()));
-                    },
-                    child: const Icon(Icons.arrow_back_outlined),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            const Center(
-              child: Text("PENGAJUAN IZIN",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            ),
-            const SizedBox(height: 30),
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 15),
@@ -154,7 +138,7 @@ class _PengajuanState extends State<Pengajuan> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const DashboardPelayan()));
+                                         DashboardPelayan()));
                           },
                           child: const Text(
                             'Ok',
@@ -172,7 +156,7 @@ class _PengajuanState extends State<Pengajuan> {
                 child: Center(
                   child: Container(
                     height: 50,
-                   // width: 160,
+                    // width: 160,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 0, 0, 0),
                       borderRadius: BorderRadius.circular(90),

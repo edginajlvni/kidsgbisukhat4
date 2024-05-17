@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+
+
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -18,8 +20,8 @@ class _LogInScreenState extends State<LogInScreen> {
   bool visible = false;
 
   final auth = FirebaseAuth.instance;
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool _isSecurePassword = true;
 
@@ -94,7 +96,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
                     TextFormField(
-                      controller: _emailController,
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -127,14 +129,14 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       },
                       onSaved: (value) {
-                        _emailController.text = value!;
+                        emailController.text = value!;
                       },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                     TextFormField(
-                      controller: _passwordController,
+                      controller: passwordController,
                       obscureText: _isSecurePassword,
                       decoration: InputDecoration(
                         enabledBorder: const UnderlineInputBorder(
@@ -166,7 +168,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       },
                       onSaved: (value) {
-                        _passwordController.text = value!;
+                        passwordController.text = value!;
                       },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
@@ -183,7 +185,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         setState(() {
                           visible = true;
                         });
-                        signIn(_emailController.text, _passwordController.text);
+                        signIn(emailController.text, passwordController.text);
                       },
                       child: Container(
                         height: 50,
@@ -225,8 +227,8 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void route() {
     User? user = FirebaseAuth.instance.currentUser;
-    FirebaseFirestore.instance
-        .collection('admin')
+    var a = FirebaseFirestore.instance
+        .collection('users')
         .doc(user!.uid)
         .get()
         .then((DocumentSnapshot documentSnapshot) {
@@ -235,7 +237,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardPelayan(),
+              builder: (context) =>  DashboardPelayan(),
             ),
           );
         } else {
@@ -255,6 +257,11 @@ class _LogInScreenState extends State<LogInScreen> {
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
         route();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {

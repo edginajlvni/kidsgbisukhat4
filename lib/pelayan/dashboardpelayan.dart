@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/pelayan/jadwalpelayanan.dart';
 import 'package:kidsgbisukhat4/pelayan/pengajuan.dart';
@@ -13,362 +15,381 @@ class DashboardPelayan extends StatefulWidget {
 }
 
 class _DashboardPelayanState extends State<DashboardPelayan> {
+  final user = FirebaseAuth.instance.currentUser!;
+
+  List<String> docIDs = [];
+
+  //get docIDs
+  Future getDocId() async{
+    await FirebaseFirestore.instance.collection('users').get().then((snapshot) =>
+    snapshot.docs.forEach((document)
+    {print(document.reference);
+    docIDs.add(document.reference.id);
+    }),
+    );
+  }
+
   @override
+  void iniState(){
+    getDocId();
+    super.initState();
+
+
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 209, 242, 255),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilPelayan()));
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 130,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 22,
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.asset(
-                          "assets/images/profill.webp",
-                          width: 80,
-                        ),
+          child: Padding(
+        padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfilPelayan()));
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 130,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 22,
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset(
+                        "assets/images/profill.webp",
+                        width: 80,
                       ),
-                      const SizedBox(width: 15),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 5),
-                            child: Text(
-                              "Shallom",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 5),
-                            child: Text(
-                              "Edgina Juliviani",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ),
-                          Text(
-                            "Guru Kelas Besar ",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w300,
-                                color: Color.fromARGB(255, 192, 192, 192)),
-                          ),
-                        ],
-                      ),
-                    ]),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  "Menu",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-
-              // jadwal pelayanan
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const JadwalPelayanan()));
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
-                  leading: const Icon(
-                    Icons.date_range_outlined,
-                    color: Colors.black,
-                  ),
-                  title: const Text("Jadwal Pelayanan"),
-                ),
-              ),
-
-              // bahan mengajar
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const UnduhBahan()));
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
-                  leading: const Icon(
-                    Icons.download,
-                    color: Colors.black,
-                  ),
-                  title: const Text("Bahan Mengajar"),
-                ),
-              ),
-
-              // pengajuan izin
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Pengajuan()));
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
-                  leading: const Icon(
-                    Icons.edit,
-                    color: Colors.black,
-                  ),
-                  title: const Text("Pengajuan Izin"),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  "Informasi",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
+                    ),
+                    const SizedBox(width: 15),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //
-                        Column(children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 165, 161, 161),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(115, 245, 241, 241),
-                                  )
-                                ]),
-                            child: InkWell(
-                              child: Image.asset(
-                                'assets/images/profil.jpg',
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DashboardPelayan()));
-                              },
-                            ),
-                          ),
-                        ]),
-
-                        const SizedBox(width: 10),
-                        Column(children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 165, 161, 161),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(115, 245, 241, 241),
-                                  )
-                                ]),
-                            child: InkWell(
-                              child: Image.asset(
-                                'assets/images/profill.webp',
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DashboardPelayan()));
-                              },
-                            ),
-                          ),
-                        ]),
-
-                        const SizedBox(width: 10),
-                        Column(children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 165, 161, 161),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(115, 245, 241, 241),
-                                  )
-                                ]),
-                            child: InkWell(
-                              child: Image.asset(
-                                'assets/images/profill.webp',
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DashboardPelayan()));
-                              },
-                            ),
-                          ),
-                        ]),
-
-                        const SizedBox(width: 10),
-                        Column(children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 165, 161, 161),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(115, 245, 241, 241),
-                                  )
-                                ]),
-                            child: InkWell(
-                              child: Image.asset(
-                                'assets/images/profill.webp',
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DashboardPelayan()));
-                              },
-                            ),
-                          ),
-                        ]),
-
-                        const SizedBox(width: 10),
-                        Column(children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 165, 161, 161),
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(115, 245, 241, 241),
-                                  )
-                                ]),
-                            child: InkWell(
-                              child: Image.asset(
-                                'assets/images/1.jpg',
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DashboardPelayan()));
-                              },
-                            ),
-                          ),
-                        ]),
-                      ],
-                    )),
-              ),
-
-              //button keluar
-              const SizedBox(height: 40),
-              InkWell(
-                onTap: () {},
-                child: MaterialButton(
-                  onPressed: () {
-                    _showExitConfirmationDialog(context);
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 50,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(90),
-                      ),
-                      child: const Center(
-                        child: Text("Keluar",
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Text(
+                            "Shallom",
                             style: TextStyle(
-                                color: Colors.black,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                      ),
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Text(
+                            "Nama: ",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                          ),
+                        ),
+                        Text(
+                          "Guru Kelas Besar ",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: Color.fromARGB(255, 192, 192, 192)),
+                        ),
+                      ],
+                    ),
+                  ]),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Menu",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            // jadwal pelayanan
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const JadwalPelayanan()));
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: const Color.fromARGB(255, 255, 255, 255),
+                leading: const Icon(
+                  Icons.date_range_outlined,
+                  color: Colors.black,
+                ),
+                title: const Text("Jadwal Pelayanan"),
+              ),
+            ),
+
+            // bahan mengajar
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const UnduhBahan()));
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: const Color.fromARGB(255, 255, 255, 255),
+                leading: const Icon(
+                  Icons.download,
+                  color: Colors.black,
+                ),
+                title: const Text("Bahan Mengajar"),
+              ),
+            ),
+
+            // pengajuan izin
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Pengajuan()));
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: const Color.fromARGB(255, 255, 255, 255),
+                leading: const Icon(
+                  Icons.edit,
+                  color: Colors.black,
+                ),
+                title: const Text("Pengajuan Izin"),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Informasi",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      //
+                      Column(children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 165, 161, 161),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(115, 245, 241, 241),
+                                )
+                              ]),
+                          child: InkWell(
+                            child: Image.asset(
+                              'assets/images/profil.jpg',
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DashboardPelayan()));
+                            },
+                          ),
+                        ),
+                      ]),
+
+                      const SizedBox(width: 10),
+                      Column(children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 165, 161, 161),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(115, 245, 241, 241),
+                                )
+                              ]),
+                          child: InkWell(
+                            child: Image.asset(
+                              'assets/images/profill.webp',
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DashboardPelayan()));
+                            },
+                          ),
+                        ),
+                      ]),
+
+                      const SizedBox(width: 10),
+                      Column(children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 165, 161, 161),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(115, 245, 241, 241),
+                                )
+                              ]),
+                          child: InkWell(
+                            child: Image.asset(
+                              'assets/images/profill.webp',
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DashboardPelayan()));
+                            },
+                          ),
+                        ),
+                      ]),
+
+                      const SizedBox(width: 10),
+                      Column(children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 165, 161, 161),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(115, 245, 241, 241),
+                                )
+                              ]),
+                          child: InkWell(
+                            child: Image.asset(
+                              'assets/images/profill.webp',
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DashboardPelayan()));
+                            },
+                          ),
+                        ),
+                      ]),
+
+                      const SizedBox(width: 10),
+                      Column(children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 165, 161, 161),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(115, 245, 241, 241),
+                                )
+                              ]),
+                          child: InkWell(
+                            child: Image.asset(
+                              'assets/images/1.jpg',
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DashboardPelayan()));
+                            },
+                          ),
+                        ),
+                      ]),
+                    ],
+                  )),
+            ),
+
+            //button keluar
+            const SizedBox(height: 40),
+            InkWell(
+              onTap: () {},
+              child: MaterialButton(
+                onPressed: () {
+                  _showExitConfirmationDialog(context);
+                },
+                child: Center(
+                  child: Container(
+                    height: 30,
+                    width: 110,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(90),
+                    ),
+                    child: const Center(
+                      child: Text("Keluar",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
+      )),
     );
   }
 }
@@ -391,7 +412,7 @@ Future<void> _showExitConfirmationDialog(BuildContext context) async {
           TextButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LogInScreen()));
+                  MaterialPageRoute(builder: (context) => LogInScreen()));
             },
             child: const Text('Ya'),
           ),

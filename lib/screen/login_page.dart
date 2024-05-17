@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
-
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
+import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,17 +30,17 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height * 0.70,
               child: Center(
                 child: Container(
-                  margin: const EdgeInsets.all(12),
+                  margin: EdgeInsets.all(12),
                   child: Form(
                     key: _formkey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 30,
                         ),
-                        const Text(
+                        Text(
                           "Login",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           color: Colors.white,
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         Visibility(
@@ -175,6 +175,46 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
+                      ),
+                      elevation: 5.0,
+                      height: 40,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LogInScreen(),
+                          ),
+                        );
+                      },
+                      color: Colors.blue[900],
+                      child: Text(
+                        "Register Now",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -189,18 +229,18 @@ class _LoginPageState extends State<LoginPage> {
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        if (documentSnapshot.get('rool') == "Teacher") {
+        if (documentSnapshot.get('jabatan') == "Guru") {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardAdmin(),
+              builder: (context) => DashboardPelayan(),
             ),
           );
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardPelayan(),
+              builder: (context) => DashboardAdmin(),
             ),
           );
         }
