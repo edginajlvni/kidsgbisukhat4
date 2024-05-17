@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
-import 'package:kidsgbisukhat4/admin/datapelayan.dart';
 
 class TambahDataPelayan extends StatefulWidget {
   const TambahDataPelayan({super.key});
@@ -50,7 +49,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         title: const Text("Tambah Data Pelayan",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),

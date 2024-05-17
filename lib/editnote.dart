@@ -6,7 +6,7 @@ import 'package:kidsgbisukhat4/homestate.dart';
 
 class editnote extends StatefulWidget {
   DocumentSnapshot docid;
-  editnote({required this.docid});
+  editnote({super.key, required this.docid});
 
   @override
   _editnoteState createState() => _editnoteState();
@@ -35,19 +35,19 @@ class _editnoteState extends State<editnote> {
                 'content': content.text,
               }).whenComplete(() {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => DP()));
+                    context, MaterialPageRoute(builder: (_) => const DP()));
               });
             },
-            child: Text("save"),
+            child: const Text("save"),
           ),
           MaterialButton(
             onPressed: () {
               widget.docid.reference.delete().whenComplete(() {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => Home()));
+                    context, MaterialPageRoute(builder: (_) => const Home()));
               });
             },
-            child: Text("delete"),
+            child: const Text("delete"),
           ),
         ],
       ),
@@ -58,12 +58,12 @@ class _editnoteState extends State<editnote> {
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
                 controller: title,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'title',
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -73,7 +73,7 @@ class _editnoteState extends State<editnote> {
                   controller: content,
                   expands: true,
                   maxLines: null,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'content',
                   ),
                 ),

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddStudentPage extends StatefulWidget {
-  AddStudentPage({Key? key}) : super(key: key);
+  const AddStudentPage({super.key});
 
   @override
   _AddStudentPageState createState() => _AddStudentPageState();
@@ -50,19 +50,19 @@ class _AddStudentPageState extends State<AddStudentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add New Student"),
+        title: const Text("Add New Student"),
       ),
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: ListView(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -79,10 +79,10 @@ class _AddStudentPageState extends State<AddStudentPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -101,11 +101,11 @@ class _AddStudentPageState extends State<AddStudentPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
@@ -138,18 +138,18 @@ class _AddStudentPageState extends State<AddStudentPage> {
                           });
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'Register',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () => {clearText()},
-                      child: Text(
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      child: const Text(
                         'Reset',
                         style: TextStyle(fontSize: 18.0),
                       ),
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
                     ),
                   ],
                 ),

@@ -38,7 +38,7 @@ class _DataGuruState extends State<DataGuru> {
             ? Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 253, 253, 253),
+                  color: const Color.fromARGB(255, 253, 253, 253),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: TextField(

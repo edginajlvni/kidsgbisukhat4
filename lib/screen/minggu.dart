@@ -25,7 +25,7 @@ class Minggu_2 extends StatefulWidget {
 class _Minggu_2State extends State<Minggu_2> {
   @override
   Widget build(BuildContext context) {
-    return tugas();
+    return const tugas();
   }
 }
 
@@ -39,7 +39,7 @@ class Minggu_3 extends StatefulWidget {
 class _Minggu_3State extends State<Minggu_3> {
   @override
   Widget build(BuildContext context) {
-    return tugas();
+    return const tugas();
   }
 }
 
@@ -53,7 +53,7 @@ class Minggu_4 extends StatefulWidget {
 class _Minggu_4State extends State<Minggu_4> {
   @override
   Widget build(BuildContext context) {
-    return tugas();
+    return const tugas();
   }
 }
 

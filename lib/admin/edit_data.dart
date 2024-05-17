@@ -4,7 +4,7 @@ import 'package:kidsgbisukhat4/admin/kelola_data.dart';
 
 class EditData extends StatefulWidget {
   DocumentSnapshot docid;
-  EditData({required this.docid});
+  EditData({super.key, required this.docid});
 
   @override
   State<EditData> createState() => _EditDataState();
@@ -17,7 +17,7 @@ class _EditDataState extends State<EditData> {
   TextEditingController jabatan = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  bool _isObscure = true;
+  final bool _isObscure = true;
 
   @override
   void initState() {
@@ -27,6 +27,7 @@ class _EditDataState extends State<EditData> {
     super.initState();
   }
 
+  @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     nama.dispose();

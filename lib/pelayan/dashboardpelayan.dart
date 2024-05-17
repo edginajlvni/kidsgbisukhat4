@@ -36,6 +36,7 @@ class _DashboardPelayanState extends State<DashboardPelayan> {
 
 
   }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 209, 242, 255),
@@ -412,7 +413,7 @@ Future<void> _showExitConfirmationDialog(BuildContext context) async {
           TextButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LogInScreen()));
+                  MaterialPageRoute(builder: (context) => const LogInScreen()));
             },
             child: const Text('Ya'),
           ),

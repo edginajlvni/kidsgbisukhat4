@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 
 class tambah_data extends StatefulWidget {
+  const tambah_data({super.key});
+
   @override
   State<tambah_data> createState() => _tambah_dataState();
 }
@@ -43,7 +45,7 @@ class _tambah_dataState extends State<tambah_data> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         title: const Text("TAMBAH DATA PELAYAN",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -262,7 +264,7 @@ class _tambah_dataState extends State<tambah_data> {
 
   void signUp(
       String email, String password, String jabatan, String nama) async {
-    CircularProgressIndicator();
+    const CircularProgressIndicator();
     if (_formKey.currentState!.validate()) {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)

@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/DP.dart';
 
-import 'main.dart';
 
 class addnote extends StatelessWidget {
   TextEditingController title = TextEditingController();
   TextEditingController content = TextEditingController();
 
   CollectionReference ref = FirebaseFirestore.instance.collection('notes');
+
+  addnote({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,10 @@ class addnote extends StatelessWidget {
                 'content': content.text,
               }).whenComplete(() {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => DP()));
+                    context, MaterialPageRoute(builder: (_) => const DP()));
               });
             },
-            child: Text(
+            child: const Text(
               "save",
             ),
           ),
@@ -38,12 +39,12 @@ class addnote extends StatelessWidget {
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
                 controller: title,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'title',
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -53,7 +54,7 @@ class addnote extends StatelessWidget {
                   controller: content,
                   expands: true,
                   maxLines: null,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'content',
                   ),
                 ),

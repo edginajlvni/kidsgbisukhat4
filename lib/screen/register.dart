@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
-import 'package:kidsgbisukhat4/screen/signin.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -130,7 +129,7 @@ class _RegisterState extends State<Register> {
                           },
                           onChanged: (value) {},
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           obscureText: _isObscure,
                           controller: passwordController,
@@ -291,13 +290,13 @@ class _RegisterState extends State<Register> {
                                     namaController.text,
                                     jabatanController.text);
                               },
+                              color: Colors.white,
                               child: const Text(
                                 "Register",
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
                               ),
-                              color: Colors.white,
                             ),
                           ],
                         ),

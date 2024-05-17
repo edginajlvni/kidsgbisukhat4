@@ -55,17 +55,17 @@ class _JadwalPelayananState extends State<JadwalPelayanan>
                       height: 50,
                       width: double.infinity,
                       color: Colors.white,
-                      child: TabBar(
-                          physics: const ClampingScrollPhysics(),
-                          padding: const EdgeInsets.only(top: 10),
+                      child: const TabBar(
+                          physics: ClampingScrollPhysics(),
+                          padding: EdgeInsets.only(top: 10),
                           unselectedLabelColor:
-                              const Color.fromARGB(255, 0, 0, 0),
+                              Color.fromARGB(255, 0, 0, 0),
                           indicatorSize: TabBarIndicatorSize.label,
                           tabs: [
                             Tab(
-                              child: Container(
+                              child: SizedBox(
                                 height: 35,
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
                                     "1",
@@ -77,9 +77,9 @@ class _JadwalPelayananState extends State<JadwalPelayanan>
                               ),
                             ),
                             Tab(
-                              child: Container(
+                              child: SizedBox(
                                 height: 35,
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.center,
                                   child: Text("2",
                                       style: TextStyle(
@@ -89,9 +89,9 @@ class _JadwalPelayananState extends State<JadwalPelayanan>
                               ),
                             ),
                             Tab(
-                              child: Container(
+                              child: SizedBox(
                                 height: 35,
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.center,
                                   child: Text("3",
                                       style: TextStyle(
@@ -101,9 +101,9 @@ class _JadwalPelayananState extends State<JadwalPelayanan>
                               ),
                             ),
                             Tab(
-                              child: Container(
+                              child: SizedBox(
                                 height: 35,
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.center,
                                   child: Text("4",
                                       style: TextStyle(
@@ -113,9 +113,9 @@ class _JadwalPelayananState extends State<JadwalPelayanan>
                               ),
                             ),
                             Tab(
-                              child: Container(
+                              child: SizedBox(
                                 height: 35,
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.center,
                                   child: Text("5",
                                       style: TextStyle(
@@ -127,10 +127,10 @@ class _JadwalPelayananState extends State<JadwalPelayanan>
                           ]),
                     ),
                   ),
-                  Container(
+                  const SizedBox(
                     width: double.maxFinite,
                     height: 500,
-                    child: const TabBarView(children: [
+                    child: TabBarView(children: [
                       Minggu_1(),
                       Minggu_2(),
                       Minggu_3(),

@@ -7,6 +7,8 @@ import 'package:kidsgbisukhat4/admin/tambahpelayan.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
 class SignIn extends StatefulWidget {
+  const SignIn({super.key});
+
   @override
   _SigninPageState createState() => _SigninPageState();
 }
@@ -72,7 +74,7 @@ class _SigninPageState extends State<SignIn> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.length == 0) {
+                            if (value!.isEmpty) {
                               return "Email cannot be empty";
                             }
                             if (!RegExp(
@@ -88,7 +90,7 @@ class _SigninPageState extends State<SignIn> {
                           },
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
@@ -111,16 +113,16 @@ class _SigninPageState extends State<SignIn> {
                             contentPadding: const EdgeInsets.only(
                                 left: 14.0, bottom: 8.0, top: 15.0),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                           validator: (value) {
-                            RegExp regex = new RegExp(r'^.{6,}$');
+                            RegExp regex = RegExp(r'^.{6,}$');
                             if (value!.isEmpty) {
                               return "Password cannot be empty";
                             }
@@ -168,7 +170,7 @@ class _SigninPageState extends State<SignIn> {
                             maintainState: true,
                             visible: visible,
                             child: Container(
-                                child: CircularProgressIndicator(
+                                child: const CircularProgressIndicator(
                               color: Colors.white,
                             ))),
                       ],
@@ -185,11 +187,11 @@ class _SigninPageState extends State<SignIn> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     MaterialButton(
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20.0),
                         ),
@@ -200,7 +202,7 @@ class _SigninPageState extends State<SignIn> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TambahDataPelayan(),
+                            builder: (context) => const TambahDataPelayan(),
                           ),
                         );
                       },
@@ -227,14 +229,14 @@ class _SigninPageState extends State<SignIn> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardPelayan(),
+              builder: (context) => const DashboardPelayan(),
             ),
           );
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardAdmin(),
+              builder: (context) => const DashboardAdmin(),
             ),
           );
         }

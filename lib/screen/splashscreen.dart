@@ -7,6 +7,8 @@ import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -32,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     if (role == 'user') {
-      navigateNext( DashboardPelayan());
+      navigateNext( const DashboardPelayan());
     } else if (role == 'admin') {
       navigateNext(const DashboardAdmin());
     }

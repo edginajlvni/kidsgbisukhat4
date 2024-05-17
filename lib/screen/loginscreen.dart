@@ -237,14 +237,14 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>  DashboardPelayan(),
+              builder: (context) =>  const DashboardPelayan(),
             ),
           );
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardAdmin(),
+              builder: (context) => const DashboardAdmin(),
             ),
           );
         }

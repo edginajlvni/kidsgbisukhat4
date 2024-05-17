@@ -20,7 +20,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
 
   String searchText = '';
   // for create operation
-  Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
+  Future<void> _create() async {
     await showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -181,7 +181,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
             ? Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 253, 253, 253),
+                  color: const Color.fromARGB(255, 253, 253, 253),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: TextField(

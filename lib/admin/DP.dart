@@ -40,10 +40,10 @@ class _DPState extends State<DP> {
         stream: _usersStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text("something is wrong");
+            return const Text("something is wrong");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -77,7 +77,7 @@ class _DPState extends State<DP> {
                             padding: const EdgeInsets.all(20),
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 250, 231, 231),
+                                color: const Color.fromARGB(255, 250, 231, 231),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,28 +90,28 @@ class _DPState extends State<DP> {
                                       "Nama: " +
                                           snapshot.data!.docChanges[index]
                                               .doc['title'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   "Email: " +
                                       snapshot.data!.docChanges[index]
                                           .doc['content'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   "Jabatan: " +
                                       snapshot.data!.docChanges[index]
                                           .doc['content'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),

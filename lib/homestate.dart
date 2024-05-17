@@ -5,6 +5,8 @@ import 'package:kidsgbisukhat4/editnote.dart';
 
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -20,21 +22,21 @@ class _HomeState extends State<Home> {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (_) => addnote()));
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
       ),
       appBar: AppBar(
-        title: Text('todo'),
+        title: const Text('todo'),
       ),
       body: StreamBuilder(
         stream: _usersStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text("something is wrong");
+            return const Text("something is wrong");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -58,34 +60,34 @@ class _HomeState extends State<Home> {
                   },
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 4,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 3,
                           right: 3,
                         ),
                         child: ListTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
+                            side: const BorderSide(
                               color: Colors.black,
                             ),
                           ),
                           title: Text(
                             snapshot.data!.docChanges[index].doc['title'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                             ),
                           ),
                           subtitle: Text(
                             snapshot.data!.docChanges[index].doc['content'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                             ),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                             vertical: 12,
                             horizontal: 16,
                           ),

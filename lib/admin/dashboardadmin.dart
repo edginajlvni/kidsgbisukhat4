@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/buatberita.dart';
 import 'package:kidsgbisukhat4/admin/buatjadwal.dart';
 import 'package:kidsgbisukhat4/admin/daftarizin.dart';
 import 'package:kidsgbisukhat4/admin/datapelayan.dart';
@@ -254,7 +253,7 @@ Future<void> _showExitConfirmationDialog(BuildContext context) async {
           TextButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LogInScreen()));
+                  MaterialPageRoute(builder: (context) => const LogInScreen()));
             },
             child: const Text('Ya'),
           ),
