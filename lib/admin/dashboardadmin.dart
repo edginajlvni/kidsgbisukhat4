@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/buatberita.dart';
-import 'package:kidsgbisukhat4/admin/buatjadwal.dart';
+import 'package:kidsgbisukhat4/admin/Bahan/bahan.dart';
+import 'package:kidsgbisukhat4/admin/Berita/berita_screen.dart';
+import 'package:kidsgbisukhat4/admin/DataPelayan/data_guru.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/buatjadwal.dart';
 import 'package:kidsgbisukhat4/admin/daftarizin.dart';
-import 'package:kidsgbisukhat4/admin/datapelayan.dart';
-import 'package:kidsgbisukhat4/admin/kelolabahan.dart';
-import 'package:kidsgbisukhat4/admin/profiladmin.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardAdmin extends StatefulWidget {
   const DashboardAdmin({super.key});
@@ -15,7 +16,13 @@ class DashboardAdmin extends StatefulWidget {
 }
 
 class _DashboardAdmin extends State<DashboardAdmin> {
-  bool darkMode = true;
+  logout() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.signOut();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.remove('userPref');
+    prefs.setBool('loggedIn', false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,60 +37,37 @@ class _DashboardAdmin extends State<DashboardAdmin> {
               const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilAdmin()));
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 100,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 22,
-                      horizontal: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.asset(
-                              // "assets/images/profil.jpg",
-                              "assets/images/profill.webp",
-                              //  width: 80,
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 5),
-                                child: Text(
-                                  "ADMIN",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 0, 0, 0)),
-                                ),
-                              ),
-                              Text(
-                                "ID ",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                              ),
-                            ],
-                          ),
-                        ]),
+                child: Container(
+                  width: double.infinity,
+                  height: 100,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 22,
+                    horizontal: 20,
                   ),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 15),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "ADMIN",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 0, 0, 0)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ]),
                 ),
               ),
 
@@ -96,7 +80,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const DataPelayan()));
+                            builder: (context) => const DataGuru()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -142,7 +126,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const BuatBerita()));
+                            builder: (context) => const BeritaScreen()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -165,7 +149,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const KelolaBahan()));
+                            builder: (context) => const BahanMengajar()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -207,23 +191,30 @@ class _DashboardAdmin extends State<DashboardAdmin> {
               InkWell(
                 onTap: () {},
                 child: MaterialButton(
-                  onPressed: () {
-                    _showExitConfirmationDialog(context);
+                  onPressed: () async {
+                    await logout();
+                    Navigator.pushAndRemoveUntil(
+                        // ignore: use_build_context_synchronously
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LogInScreen(),
+                        ),
+                        (route) => false);
                   },
                   child: Center(
                     child: Container(
-                      height: 50,
-                      width: 120,
+                      height: 35,
+                      width: 110,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color.fromARGB(255, 0, 0, 0),
                         borderRadius: BorderRadius.circular(90),
                       ),
                       child: const Center(
                         child: Text("Keluar",
                             style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 18,
+                            )),
                       ),
                     ),
                   ),
@@ -238,6 +229,14 @@ class _DashboardAdmin extends State<DashboardAdmin> {
 }
 
 Future<void> _showExitConfirmationDialog(BuildContext context) async {
+  logout() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.signOut();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.remove('userPref');
+    prefs.setBool('loggedIn', false);
+  }
+
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -253,9 +252,14 @@ Future<void> _showExitConfirmationDialog(BuildContext context) async {
             child: const Text('Tidak'),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LogInScreen()));
+            onPressed: () async {
+              await logout();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LogInScreen(),
+                  ),
+                  (route) => false);
             },
             child: const Text('Ya'),
           ),

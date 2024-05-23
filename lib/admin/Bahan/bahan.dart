@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kidsgbisukhat4/admin/Bahan/edit_bahan.dart';
 import 'package:kidsgbisukhat4/admin/Bahan/my_firebase.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:kidsgbisukhat4/admin/Bahan/tambah_bahan_screen.dart';
 
-class Bahan_Mengajar extends StatefulWidget {
-  const Bahan_Mengajar({Key? key}) : super(key: key);
+class BahanMengajar extends StatefulWidget {
+  const BahanMengajar({Key? key}) : super(key: key);
 
   @override
-  State<Bahan_Mengajar> createState() => _Bahan_MengajarState();
+  State<BahanMengajar> createState() => _BahanMengajarState();
 }
 
-class _Bahan_MengajarState extends State<Bahan_Mengajar> {
+class _BahanMengajarState extends State<BahanMengajar> {
   final bahanSnapshot = MyFirebase.bahansCollection.snapshots();
-  // final Uri _url = Uri.parse('https://flutter.dev');
 
   void deleteContact(String id) async {
     await MyFirebase.bahansCollection.doc(id).delete();
@@ -53,6 +53,7 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
                 itemCount: documents.length,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
+                  final contactId = documents[index].id;
                   final bahan = documents[index].data() as Map<String, dynamic>;
                   final String bulan = bahan['bulan'];
                   final String bahan2 = bahan['bahan'];
@@ -63,21 +64,42 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
 
                     title: Text("Bulan: $bulan",
                         style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        )),
 
-                    subtitle: GestureDetector(
-                      onTap: () async {
-                        if (!await launchUrl(
-                            Uri.parse("$bahan2"))) {
-                          throw Exception('Could not launch $bahan2');
-                        }
-                      },
-                      child: Text(
-                          "$bahan2 \n$keterangan"
-                          ),
-                    ),
+                    subtitle: Text("$bahan2 \n$keterangan"),
                     isThreeLine: true,
                     //  trailing should be delete and edit button
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditBahan(
+                                  id: contactId,
+                                  bulan: bulan,
+                                  bahan: bahan2,
+                                  keterangan: keterangan,
+                                ),
+                              ),
+                            );
+                          },
+                          splashRadius: 24,
+                          icon: const Icon(Icons.edit_outlined),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            deleteContact(contactId);
+                          },
+                          splashRadius: 24,
+                          icon: const Icon(Icons.delete_outline),
+                        ),
+                      ],
+                    ),
                   );
                 },
               );
@@ -91,6 +113,19 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
               child: CircularProgressIndicator.adaptive(),
             );
           }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const TambahBahan()),
+          );
+        },
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        child: const Icon(
+          Icons.add,
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }

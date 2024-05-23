@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,18 +18,12 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   bool visible = false;
 
   final _formKey = GlobalKey<FormState>();
-
-  var name = "";
-  var email = "";
-  var password = "";
-  var jabatan = "";
-
   final auth = FirebaseAuth.instance;
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController jabatanController = TextEditingController();
+   TextEditingController email = TextEditingController();
+   TextEditingController password = TextEditingController();
+   TextEditingController nama = TextEditingController();
+   TextEditingController jabatan = TextEditingController();
 
   bool _isObscure = true;
   File? file;
@@ -38,23 +31,30 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    nameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    jabatanController.dispose();
+    nama.dispose();
+    email.dispose();
+    password.dispose();
+    jabatan.dispose();
     super.dispose();
   }
 
   clearText() {
-    nameController.clear();
-    emailController.clear();
-    passwordController.clear();
-    jabatanController.clear();
+    nama.clear();
+    email.clear();
+    password.clear();
+    jabatan.clear();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        elevation: 0,
+        title: const Text("Tambah Data Pelayan",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
@@ -63,40 +63,15 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const DashboardAdmin()));
-                          },
-                          child: const Icon(Icons.arrow_back_outlined),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Center(
-                    child: Text("TAMBAH DATA PELAYAN",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-
                   //email
                   const SizedBox(
-                    height: 40,
+                    height: 10,
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 15),
                     child: TextFormField(
-                      controller: emailController,
+                      controller: email,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(
@@ -129,7 +104,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 15),
                     child: TextFormField(
-                      controller: nameController,
+                      controller: nama,
                       decoration: InputDecoration(
                           labelText: 'Nama',
                           border: OutlineInputBorder(
@@ -155,7 +130,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 15),
                     child: TextFormField(
-                      controller: passwordController,
+                      controller: password,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
                               icon: Icon(_isObscure
@@ -194,7 +169,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 15),
                     child: TextFormField(
-                      controller: jabatanController,
+                      controller: jabatan,
                       decoration: InputDecoration(
                           labelText: 'Jabatan',
                           border: OutlineInputBorder(
@@ -215,60 +190,74 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                     ),
                   ),
 
-                  //button upload
-                  const SizedBox(height: 40),
-
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        MaterialButton(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          elevation: 5.0,
-                          height: 40,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                name = nameController.text;
-                                email = emailController.text;
-                                password = passwordController.text;
-                                addUser();
-                                clearText();
-                              });
-                            }
-                          },
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, otherwise false.
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                name = nameController.text;
-                                email = emailController.text;
-                                password = passwordController.text;
-                                addUser();
-                                clearText();
-                              });
-                            }
-                          },
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(fontSize: 18.0),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: MaterialButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  signUp(
+                                      email.text,
+                                      password.text,
+                                      jabatan.text,
+                                      nama.text);
+                                  clearText();
+                                });
+                              }
+                            },
+                            child: Center(
+                              child: Container(
+                                height: 30,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                  borderRadius: BorderRadius.circular(90),
+                                ),
+                                child: const Center(
+                                  child: Text("Tambah",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () => {clearText()},
-                          child: const Text(
-                            'Reset',
-                            style: TextStyle(fontSize: 18.0),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: MaterialButton(
+                            onPressed: () => {clearText()},
+                            child: Center(
+                              child: Container(
+                                height: 30,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                  borderRadius: BorderRadius.circular(90),
+                                ),
+                                child: const Center(
+                                  child: Text("Hapus",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blueGrey),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -277,18 +266,32 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
     );
   }
 
-  CollectionReference pelayan =
-      FirebaseFirestore.instance.collection('pelayan');
+  void signUp(
+      String email, String password, String jabatan, String nama) async {
+    const CircularProgressIndicator();
+    if (_formKey.currentState!.validate()) {
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) =>
+              {postDetailsToFirestore(email, jabatan, password, nama)})
+          // ignore: body_might_complete_normally_catch_error
+          .catchError((e) {});
+    }
+  }
 
-  Future<void> addUser() {
-    return pelayan
-        .add({
-          'name': name,
-          'email': email,
-          'password': password,
-          'jabatan' : jabatan,
-        })
-        .then((value) => print('User Added'))
-        .catchError((error) => print('Failed to Add user: $error'));
+  postDetailsToFirestore(
+      String email, String jabatan, String password, String nama) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    var user = auth.currentUser;
+
+    CollectionReference ref = FirebaseFirestore.instance.collection('users');
+    ref.doc(user!.uid).set({
+      'email': email,
+      'jabatan': jabatan,
+      'password': password,
+      'nama': nama,
+    });
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const DashboardAdmin()));
   }
 }

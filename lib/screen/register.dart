@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
-import 'package:kidsgbisukhat4/screen/signin.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -18,18 +17,18 @@ class _RegisterState extends State<Register> {
   bool showProgress = false;
   bool visible = false;
 
-  final _formkey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+  final auth = FirebaseAuth.instance;
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmpassController = TextEditingController();
-  final TextEditingController name = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController jabatanController = TextEditingController();
+  final TextEditingController namaController = TextEditingController();
+
   bool _isObscure = true;
   bool _isObscure2 = true;
   File? file;
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class _RegisterState extends State<Register> {
                 child: Container(
                   margin: const EdgeInsets.all(12),
                   child: Form(
-                    key: _formkey,
+                    key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +54,7 @@ class _RegisterState extends State<Register> {
                           height: 80,
                         ),
                         const Text(
-                          "Tambah Data",
+                          "Khusus Admin",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -101,9 +100,36 @@ class _RegisterState extends State<Register> {
                           onChanged: (value) {},
                           keyboardType: TextInputType.emailAddress,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
+                        TextFormField(
+                          controller: namaController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Nama',
+                            enabled: true,
+                            contentPadding: const EdgeInsets.only(
+                                left: 14.0, bottom: 8.0, top: 8.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Harap diisi";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {},
+                        ),
+                        SizedBox(height: 20),
                         TextFormField(
                           obscureText: _isObscure,
                           controller: passwordController,
@@ -124,16 +150,16 @@ class _RegisterState extends State<Register> {
                             contentPadding: const EdgeInsets.only(
                                 left: 14.0, bottom: 8.0, top: 15.0),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           validator: (value) {
-                            RegExp regex = new RegExp(r'^.{6,}$');
+                            RegExp regex = RegExp(r'^.{6,}$');
                             if (value!.isEmpty) {
                               return "Password cannot be empty";
                             }
@@ -145,7 +171,7 @@ class _RegisterState extends State<Register> {
                           },
                           onChanged: (value) {},
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
@@ -168,12 +194,12 @@ class _RegisterState extends State<Register> {
                             contentPadding: const EdgeInsets.only(
                                 left: 14.0, bottom: 8.0, top: 15.0),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           validator: (value) {
@@ -203,12 +229,12 @@ class _RegisterState extends State<Register> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           validator: (value) {
-                            if (value!.length == 0) {
+                            if (value!.isEmpty) {
                               return "Harap diisi";
                             }
                             return null;
@@ -225,29 +251,29 @@ class _RegisterState extends State<Register> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            MaterialButton(
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0))),
-                              elevation: 5.0,
-                              height: 40,
-                              onPressed: () {
-                                const CircularProgressIndicator();
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignIn(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                "Login",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              color: Colors.white,
-                            ),
+                            // MaterialButton(
+                            //   shape: const RoundedRectangleBorder(
+                            //       borderRadius:
+                            //           BorderRadius.all(Radius.circular(20.0))),
+                            //   elevation: 5.0,
+                            //   height: 40,
+                            //   onPressed: () {
+                            //     const CircularProgressIndicator();
+                            //     Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => SignIn(),
+                            //       ),
+                            //     );
+                            //   },
+                            //   child: const Text(
+                            //     "Login",
+                            //     style: TextStyle(
+                            //       fontSize: 20,
+                            //     ),
+                            //   ),
+                            //   color: Colors.white,
+                            // ),
                             MaterialButton(
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
@@ -261,9 +287,10 @@ class _RegisterState extends State<Register> {
                                 signUp(
                                     emailController.text,
                                     passwordController.text,
+                                    namaController.text,
                                     jabatanController.text);
                               },
-                              child: Text(
+                              child: const Text(
                                 "Register",
                                 style: TextStyle(
                                   fontSize: 20,
@@ -285,11 +312,11 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  void signUp(String email, String password, String jabatan) async {
-    CircularProgressIndicator();
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password, jabatan: jabatan)
+  void signUp(String email, String password, String jabatan, String nama) async {
+    const CircularProgressIndicator();
+    if (_formKey.currentState!.validate()) {
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsToFirestore(email, jabatan)})
           .catchError((e) {});
     }
@@ -297,12 +324,13 @@ class _RegisterState extends State<Register> {
 
   postDetailsToFirestore(String email, String jabatan) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    var user = _auth.currentUser;
-    CollectionReference ref = FirebaseFirestore.instance.collection('admin');
+    var user = auth.currentUser;
+    CollectionReference ref = FirebaseFirestore.instance.collection('users');
     ref.doc(user!.uid).set({
       'email': emailController.text,
       'jabatan': jabatanController.text,
-      'password': passwordController.text
+      'password': passwordController.text,
+      'nama' : namaController.text
     });
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const LogInScreen()));

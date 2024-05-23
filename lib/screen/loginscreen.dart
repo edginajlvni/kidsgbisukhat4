@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/models/user_model.dart';
+import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
+
 import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -18,8 +24,8 @@ class _LogInScreenState extends State<LogInScreen> {
   bool visible = false;
 
   final auth = FirebaseAuth.instance;
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool _isSecurePassword = true;
 
@@ -94,7 +100,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
                     TextFormField(
-                      controller: _emailController,
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
@@ -127,14 +133,14 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       },
                       onSaved: (value) {
-                        _emailController.text = value!;
+                        emailController.text = value!;
                       },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                     TextFormField(
-                      controller: _passwordController,
+                      controller: passwordController,
                       obscureText: _isSecurePassword,
                       decoration: InputDecoration(
                         enabledBorder: const UnderlineInputBorder(
@@ -166,7 +172,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       },
                       onSaved: (value) {
-                        _passwordController.text = value!;
+                        passwordController.text = value!;
                       },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
@@ -183,7 +189,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         setState(() {
                           visible = true;
                         });
-                        signIn(_emailController.text, _passwordController.text);
+                        signIn(emailController.text, passwordController.text);
                       },
                       child: Container(
                         height: 50,
@@ -225,8 +231,9 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void route() {
     User? user = FirebaseAuth.instance.currentUser;
+    // var a =
     FirebaseFirestore.instance
-        .collection('admin')
+        .collection('users')
         .doc(user!.uid)
         .get()
         .then((DocumentSnapshot documentSnapshot) {
@@ -235,7 +242,9 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardPelayan(),
+              builder: (context) => const DashboardPelayan(
+                  // nama: documentSnapshot.get('nama'),
+                  ),
             ),
           );
         } else {
@@ -254,8 +263,39 @@ class _LogInScreenState extends State<LogInScreen> {
 
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
+      dynamic data;
       try {
-        route();
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        print(userCredential.user!.email);
+        data = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: userCredential.user!.email!)
+            .get()
+            .then((querySnapshot) =>
+                UserModel.fromSnapshot(querySnapshot.docs.first));
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('userPref', jsonEncode(data.toSharedPref()));
+        prefs.setBool('loggedIn', true);
+        print(prefs.getString('userPref'));
+        print(jsonDecode(prefs.getString('userPref')!)['nama']);
+        // route();
+        if (jsonDecode(prefs.getString('userPref')!)['jabatan'] == 'Guru') {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PelayanDashboard(),
+              ));
+        } else {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DashboardAdmin(),
+              ));
+        }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');

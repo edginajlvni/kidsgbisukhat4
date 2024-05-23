@@ -9,7 +9,7 @@ class ProfilPelayan extends StatefulWidget {
 }
 
 class _ProfilPelayanState extends State<ProfilPelayan> {
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -72,7 +72,7 @@ class _ProfilPelayanState extends State<ProfilPelayan> {
                   SizedBox(
                     height: 20,
                   ),
-                   Text(
+                  Text(
                     "15001",
                     style: TextStyle(
                       fontSize: 14,

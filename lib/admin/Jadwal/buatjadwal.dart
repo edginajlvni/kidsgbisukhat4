@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
-import 'package:kidsgbisukhat4/pelayan/profilpelayan.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/tugasminggu4_screen.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%201/minggu_1.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%202/minggu_2.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%203/minggu_3.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/minggu_4.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/minggu_5.dart';
 
 class BuatJadwal extends StatefulWidget {
   const BuatJadwal({super.key});
@@ -13,36 +17,20 @@ class _BuatJadwalState extends State<BuatJadwal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Buat Jadwal",
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DashboardAdmin()));
-                      },
-                      child: const Icon(Icons.arrow_back_outlined),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              const Center(
-                child: Text("BUAT JADWAL",
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: InkWell(
@@ -50,7 +38,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilPelayan()));
+                            builder: (context) => const Minggu1()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -79,7 +67,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilPelayan()));
+                            builder: (context) => const Minggu2()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -95,7 +83,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     child: const Row(children: [
                       Icon(Icons.calendar_month),
                       SizedBox(width: 15),
-                      Text("Minggu 1"),
+                      Text("Minggu 2"),
                     ]),
                   ),
                 ),
@@ -108,7 +96,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilPelayan()));
+                            builder: (context) => const Minggu3()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -124,7 +112,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     child: const Row(children: [
                       Icon(Icons.calendar_month),
                       SizedBox(width: 15),
-                      Text("Minggu 1"),
+                      Text("Minggu 3"),
                     ]),
                   ),
                 ),
@@ -137,7 +125,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilPelayan()));
+                            builder: (context) => const TugasMinggu4Screen()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -153,7 +141,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     child: const Row(children: [
                       Icon(Icons.calendar_month),
                       SizedBox(width: 15),
-                      Text("Minggu 1"),
+                      Text("Minggu 4"),
                     ]),
                   ),
                 ),
@@ -166,7 +154,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilPelayan()));
+                            builder: (context) => const Minggu5()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -182,7 +170,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     child: const Row(children: [
                       Icon(Icons.calendar_month),
                       SizedBox(width: 15),
-                      Text("Minggu 1"),
+                      Text("Minggu 5"),
                     ]),
                   ),
                 ),

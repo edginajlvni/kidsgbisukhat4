@@ -1,28 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/Bahan/my_firebase.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:kidsgbisukhat4/admin/Berita/my_firebase.dart';
 
-class Bahan_Mengajar extends StatefulWidget {
-  const Bahan_Mengajar({Key? key}) : super(key: key);
+class BeritaPelayan extends StatefulWidget {
+  const BeritaPelayan({Key? key}) : super(key: key);
 
   @override
-  State<Bahan_Mengajar> createState() => _Bahan_MengajarState();
+  State<BeritaPelayan> createState() => _BeritaPelayanState();
 }
 
-class _Bahan_MengajarState extends State<Bahan_Mengajar> {
-  final bahanSnapshot = MyFirebase.bahansCollection.snapshots();
-  // final Uri _url = Uri.parse('https://flutter.dev');
-
-  void deleteContact(String id) async {
-    await MyFirebase.bahansCollection.doc(id).delete();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Bahan berhasil dihapus'),
-        backgroundColor: const Color.fromARGB(255, 99, 99, 99),
-      ),
-    );
-  }
+class _BeritaPelayanState extends State<BeritaPelayan> {
+  final bahanSnapshot = MyFirebase.newsCollection.snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +18,7 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text("Bahan Mengajar",
+        title: const Text("Berita",
             style: TextStyle(
               fontSize: 20,
             )),
@@ -44,7 +32,7 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
               if (documents.isEmpty) {
                 return Center(
                   child: Text(
-                    "Belum ada bahan tersedia",
+                    "Belum ada berita tersedia.",
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 );
@@ -54,30 +42,23 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   final bahan = documents[index].data() as Map<String, dynamic>;
-                  final String bulan = bahan['bulan'];
-                  final String bahan2 = bahan['bahan'];
+                  final String berita = bahan['berita'];
+                  final String waktu = bahan['waktu'];
                   final String keterangan = bahan['keterangan'];
 
                   return ListTile(
                     onTap: () {},
 
-                    title: Text("Bulan: $bulan",
+                    title: Text("$berita",
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
 
-                    subtitle: GestureDetector(
-                      onTap: () async {
-                        if (!await launchUrl(
-                            Uri.parse("$bahan2"))) {
-                          throw Exception('Could not launch $bahan2');
-                        }
-                      },
-                      child: Text(
-                          "$bahan2 \n$keterangan"
-                          ),
-                    ),
+                    subtitle: Text("$waktu \n$keterangan"),
                     isThreeLine: true,
                     //  trailing should be delete and edit button
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                    ),
                   );
                 },
               );

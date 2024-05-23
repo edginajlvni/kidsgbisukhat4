@@ -1,47 +1,35 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/pelayan/my_firebase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kidsgbisukhat4/admin/Bahan/my_firebase.dart';
 
-class Pengajuan extends StatefulWidget {
-  const Pengajuan({super.key});
+class TambahBahan extends StatefulWidget {
+  const TambahBahan({Key? key}) : super(key: key);
 
   @override
-  State<Pengajuan> createState() => _PengajuanState();
+  State<TambahBahan> createState() => _TambahBahanState();
 }
 
-class _PengajuanState extends State<Pengajuan> {
+class _TambahBahanState extends State<TambahBahan> {
   final _formKey = GlobalKey<FormState>();
-  final tanggalController = TextEditingController();
-  final namaController = TextEditingController();
-  final alasanControler = TextEditingController();
+  final bulanController = TextEditingController();
+  final bahanController = TextEditingController();
+  final keteranganController = TextEditingController();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUser();
+  void dispose() {
+    super.dispose();
+    bulanController.dispose();
+    bahanController.dispose();
+    keteranganController.dispose();
   }
 
-  Map<String, dynamic> dataUser = {};
-  getUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    dataUser = jsonDecode(prefs.getString('userPref')!);
-    namaController.text = dataUser['nama'];
-    setState(() {});
-  }
-
-  void addPengajuan() async {
+  void addBahan() async {
     if (_formKey.currentState!.validate()) {
       try {
-        await MyFirebase.izinCollection.add({
-          'tanggal': tanggalController.text.trim(),
-          'nama': namaController.text.trim(),
-          'alasan': alasanControler.text.trim(),
-          'status' : "0",
+        await MyFirebase.bahansCollection.add({
+          'bulan': bulanController.text.trim(),
+          'bahan': bahanController.text.trim(),
+          'keterangan': keteranganController.text.trim(),
         });
         Navigator.pop(context);
       } on FirebaseException {
@@ -56,7 +44,7 @@ class _PengajuanState extends State<Pengajuan> {
       // show snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Data harap diisi'),
+          content: const Text('Harap diisi'),
           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         ),
       );
@@ -68,7 +56,7 @@ class _PengajuanState extends State<Pengajuan> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Ajukan Izin",
+          "Tambah Bahan",
           style: TextStyle(
             fontSize: 20,
           ),
@@ -82,8 +70,7 @@ class _PengajuanState extends State<Pengajuan> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: namaController,
-                  enabled: false,
+                  controller: bulanController,
                   keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -93,12 +80,12 @@ class _PengajuanState extends State<Pengajuan> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
-                    hintText: "Nama",
+                    hintText: "Bulan",
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: tanggalController,
+                  controller: bahanController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
                   validator: (value) {
@@ -108,27 +95,31 @@ class _PengajuanState extends State<Pengajuan> {
                     return null;
                   },
                   decoration: const InputDecoration(
-                    hintText: "Tanggal",
+                    hintText: "Bahan",
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: alasanControler,
+                  controller: keteranganController,
                   keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Wajib diisi";
+                      return "Isi '-' jika tidak ada";
                     }
                     return null;
                   },
                   textInputAction: TextInputAction.done,
                   decoration: const InputDecoration(
-                    hintText: "Alasan",
+                    hintText: "Keterangan",
                   ),
                 ),
                 const SizedBox(height: 40),
                 ElevatedButton(
-                    onPressed: addPengajuan, child: const Text("Ajukan Izin")),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
+                    onPressed: addBahan,
+                    child: const Text("Tambah Bahan",
+                        style: TextStyle(color: Colors.white))),
               ],
             ),
           ),

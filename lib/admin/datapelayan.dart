@@ -1,8 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
-import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
-import 'package:kidsgbisukhat4/admin/tambah.dart';
-import 'package:kidsgbisukhat4/admin/tambahpelayan.dart';
+import 'package:kidsgbisukhat4/admin/edit_data.dart';
+import 'package:kidsgbisukhat4/admin/DataPelayan/tambahpelayan.dart';
 
 class DataPelayan extends StatefulWidget {
   const DataPelayan({super.key});
@@ -12,268 +11,114 @@ class DataPelayan extends StatefulWidget {
 }
 
 class _DataPelayanState extends State<DataPelayan> {
-  final tanggalLahirController = TextEditingController();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  DateTime? dateTime;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool isLoadingSave = false;
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('users').snapshots();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: const Text("Data Pelayan",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const TambahDataPelayan()),
+          );
+        },
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         child: const Icon(
           Icons.add,
           color: Colors.black,
         ),
       ),
-      // backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 5, right: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: MaterialButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DashboardAdmin()));
-                        },
-                        child: const Icon(Icons.arrow_back_outlined),
-                      ),
-                    ),
-                    Center(
-                      child: InkWell(
-                        onTap: () {},
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TambahDataPelayan()));
-                          },
-                          child: const Icon(Icons.add),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Center(
-                child: Text("DATA PELAYAN",
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  width: double.infinity,
-                  height: 120,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 22,
-                    horizontal: 20,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 240, 240, 240),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(200),
-                      child: Image.asset(
-                        "assets/images/profill.webp",
-                        //width: 90,
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(
-                            "Nama",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0)),
+      body: StreamBuilder(
+          stream: _usersStream,
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return const Text("something is wrong");
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (_, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                EditData(docid: snapshot.data!.docs[index]),
                           ),
+                        );
+                      },
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 10, left: 15, right: 15),
+                        child: Column(
+                          children: [
+                            Material(
+                              elevation: 5,
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                padding: const EdgeInsets.all(20),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      "Email: " +
+                                          snapshot.data!.docChanges[index]
+                                              .doc['email'],
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Jabatan: " +
+                                          snapshot.data!.docChanges[index]
+                                              .doc['jabatan'],
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Password: " +
+                                          snapshot.data!.docChanges[index]
+                                              .doc['password'],
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          "ID ",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                        Text(
-                          "Jabatan",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                      ],
-                    ),
-                  ]),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  width: double.infinity,
-                  height: 120,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 22,
-                    horizontal: 20,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 240, 240, 240),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(200),
-                      child: Image.asset(
-                        "assets/images/profill.webp",
-                        //width: 90,
                       ),
-                    ),
-                    const SizedBox(width: 15),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(
-                            "Nama",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                          ),
-                        ),
-                        Text(
-                          "ID ",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                        Text(
-                          "Jabatan",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                      ],
-                    ),
-                  ]),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  width: double.infinity,
-                  height: 120,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 22,
-                    horizontal: 20,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 240, 240, 240),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(200),
-                      child: Image.asset(
-                        "assets/images/profill.webp",
-                        //width: 90,
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(
-                            "Nama",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 0, 0)),
-                          ),
-                        ),
-                        Text(
-                          "ID ",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                        Text(
-                          "Jabatan",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0)),
-                        ),
-                      ],
-                    ),
-                  ]),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
-        ),
-      ),
+                    );
+                  },
+                );
+          }),
     );
   }
-
-//   Future createOrUpdate({UserModel? user}) async {
-//     String action = 'create';
-
-//     if (user != null) {
-//       action = 'update';
-//       _nameController.text = user.name!;
-//       _emailController.text = user.email!;
-
-//        _tanggalLahirController.text = DateFormat('dd MMMM yyyy').format(date);
-
-//       _passwordController.text = user.password!;
-//       _dateTime = user.tanggalLahir!.toDate();
-//     }
-//   }
-// }
 }
