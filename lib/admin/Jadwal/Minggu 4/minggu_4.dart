@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Minggu4 extends StatefulWidget {
-  const Minggu4({Key? key}) : super(key: key);
+  const Minggu4({super.key});
 
   @override
   State<Minggu4> createState() => _Minggu4State();
@@ -96,7 +96,7 @@ class _Minggu4State extends State<Minggu4> {
           }),
       bottomSheet: Container(
         height: 60,
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: const Color.fromARGB(255, 255, 255, 255),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,

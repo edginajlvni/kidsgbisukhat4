@@ -7,7 +7,7 @@ import 'package:kidsgbisukhat4/pelayan/pengajuan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DaftarPengajuan extends StatefulWidget {
-  const DaftarPengajuan({Key? key}) : super(key: key);
+  const DaftarPengajuan({super.key});
 
   @override
   State<DaftarPengajuan> createState() => _DaftarPengajuanState();

@@ -4,12 +4,12 @@ import 'package:kidsgbisukhat4/admin/Berita/my_firebase.dart';
 
 class EditBerita extends StatefulWidget {
   const EditBerita({
-    Key? key,
+    super.key,
     required this.id,
     required this.berita,
     required this.waktu,
     required this.keterangan,
-  }) : super(key: key);
+  });
   final String id;
 
   final String berita;

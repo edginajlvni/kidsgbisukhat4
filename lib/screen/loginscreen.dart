@@ -250,7 +250,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => DashboardAdmin(),
+              builder: (context) => const DashboardAdmin(),
             ),
           );
         }
@@ -286,13 +286,13 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => PelayanDashboard(),
+                builder: (context) => const PelayanDashboard(),
               ));
         } else {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => DashboardAdmin(),
+                builder: (context) => const DashboardAdmin(),
               ));
         }
       } on FirebaseAuthException catch (e) {

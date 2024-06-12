@@ -46,18 +46,18 @@ class _PengajuanState extends State<Pengajuan> {
         Navigator.pop(context);
       } on FirebaseException {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Gagal menambahkan'),
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          const SnackBar(
+            content: Text('Gagal menambahkan'),
+            backgroundColor: Color.fromARGB(255, 0, 0, 0),
           ),
         );
       }
     } else {
       // show snackbar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Data harap diisi'),
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        const SnackBar(
+          content: Text('Data harap diisi'),
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
       );
     }

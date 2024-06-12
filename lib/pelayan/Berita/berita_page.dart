@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/Berita/my_firebase.dart';
 
 class BeritaPelayan extends StatefulWidget {
-  const BeritaPelayan({Key? key}) : super(key: key);
+  const BeritaPelayan({super.key});
 
   @override
   State<BeritaPelayan> createState() => _BeritaPelayanState();
@@ -49,14 +49,14 @@ class _BeritaPelayanState extends State<BeritaPelayan> {
                   return ListTile(
                     onTap: () {},
 
-                    title: Text("$berita",
+                    title: Text(berita,
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
 
                     subtitle: Text("$waktu \n$keterangan"),
                     isThreeLine: true,
                     //  trailing should be delete and edit button
-                    trailing: Row(
+                    trailing: const Row(
                       mainAxisSize: MainAxisSize.min,
                     ),
                   );

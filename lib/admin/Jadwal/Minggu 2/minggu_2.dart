@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Minggu2 extends StatefulWidget {
-  const Minggu2({Key? key}) : super(key: key);
+  const Minggu2({super.key});
 
   @override
   State<Minggu2> createState() => _Minggu2State();

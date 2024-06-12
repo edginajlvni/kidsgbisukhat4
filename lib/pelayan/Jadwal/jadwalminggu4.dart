@@ -60,6 +60,9 @@ class _TugasMinggu4State extends State<TugasMinggu4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Jadwal Minggu 4"),
+      ),
       body: jadwal.isEmpty
           ? const Center(
               child: Text('Belum ada jadwal.'),

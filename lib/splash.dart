@@ -10,7 +10,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LogInScreen()));
+          context, MaterialPageRoute(builder: (context) => const LogInScreen()));
     });
     return const Scaffold(
       backgroundColor: Color.fromARGB(255, 245, 190, 255),

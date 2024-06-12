@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Minggu3 extends StatefulWidget {
-  const Minggu3({Key? key}) : super(key: key);
+  const Minggu3({super.key});
 
   @override
   State<Minggu3> createState() => _Minggu3State();
@@ -127,6 +127,20 @@ class _Minggu3State extends State<Minggu3> {
           ],
         ),
       ),
+      body: ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+          title: Text(tugas[index]),
+          subtitle: Text("Nama: ${_nama[index]}"),
+        ),
+        itemCount: _nama.length > tugas.length ? tugas.length : _nama.length,
+      ),
+      floatingActionButton: ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _nama.shuffle();
+            });
+          },
+          child: const Text("Random")),
     );
   }
 }

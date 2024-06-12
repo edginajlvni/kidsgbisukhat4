@@ -44,7 +44,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
@@ -120,7 +120,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                tileColor: Color.fromARGB(255, 0, 0, 0),
+                tileColor: const Color.fromARGB(255, 0, 0, 0),
                 leading: const Icon(
                   Icons.date_range_outlined,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -146,7 +146,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                tileColor: Color.fromARGB(255, 0, 0, 0),
+                tileColor: const Color.fromARGB(255, 0, 0, 0),
                 leading: const Icon(
                   Icons.download,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -172,7 +172,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                tileColor: Color.fromARGB(255, 0, 0, 0),
+                tileColor: const Color.fromARGB(255, 0, 0, 0),
                 leading: const Icon(
                   Icons.edit,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -198,7 +198,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                tileColor: Color.fromARGB(255, 0, 0, 0),
+                tileColor: const Color.fromARGB(255, 0, 0, 0),
                 leading: const Icon(
                   Icons.newspaper,
                   color: Color.fromARGB(255, 255, 255, 255),

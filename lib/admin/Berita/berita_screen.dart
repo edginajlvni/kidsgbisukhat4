@@ -5,7 +5,7 @@ import 'package:kidsgbisukhat4/admin/Berita/my_firebase.dart';
 import 'package:kidsgbisukhat4/admin/Berita/tambah_berita_screen.dart';
 
 class BeritaScreen extends StatefulWidget {
-  const BeritaScreen({Key? key}) : super(key: key);
+  const BeritaScreen({super.key});
 
   @override
   State<BeritaScreen> createState() => _BeritaScreenState();
@@ -17,9 +17,9 @@ class _BeritaScreenState extends State<BeritaScreen> {
   void deleteContact(String id) async {
     await MyFirebase.newsCollection.doc(id).delete();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Berita berhasil dihapus'),
-        backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+      const SnackBar(
+        content: Text('Berita berhasil dihapus'),
+        backgroundColor: Color.fromARGB(255, 99, 99, 99),
       ),
     );
   }
@@ -62,7 +62,7 @@ class _BeritaScreenState extends State<BeritaScreen> {
                   return ListTile(
                     onTap: () {},
 
-                    title: Text("$berita",
+                    title: Text(berita,
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
 

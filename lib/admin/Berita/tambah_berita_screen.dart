@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/Berita/my_firebase.dart';
 
 class TambahBerita extends StatefulWidget {
-  const TambahBerita({Key? key}) : super(key: key);
+  const TambahBerita({super.key});
 
   @override
   State<TambahBerita> createState() => _TambahBeritaState();
@@ -34,18 +34,18 @@ class _TambahBeritaState extends State<TambahBerita> {
         Navigator.pop(context);
       } on FirebaseException {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Gagal menambahkan'),
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          const SnackBar(
+            content: Text('Gagal menambahkan'),
+            backgroundColor: Color.fromARGB(255, 0, 0, 0),
           ),
         );
       }
     } else {
       // show snackbar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Harap diisi'),
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        const SnackBar(
+          content: Text('Harap diisi'),
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
         ),
       );
     }

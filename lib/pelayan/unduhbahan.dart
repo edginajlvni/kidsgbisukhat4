@@ -4,7 +4,7 @@ import 'package:kidsgbisukhat4/admin/Bahan/my_firebase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Bahan_Mengajar extends StatefulWidget {
-  const Bahan_Mengajar({Key? key}) : super(key: key);
+  const Bahan_Mengajar({super.key});
 
   @override
   State<Bahan_Mengajar> createState() => _Bahan_MengajarState();
@@ -17,9 +17,9 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
   void deleteContact(String id) async {
     await MyFirebase.bahansCollection.doc(id).delete();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Bahan berhasil dihapus'),
-        backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+      const SnackBar(
+        content: Text('Bahan berhasil dihapus'),
+        backgroundColor: Color.fromARGB(255, 99, 99, 99),
       ),
     );
   }
@@ -68,7 +68,7 @@ class _Bahan_MengajarState extends State<Bahan_Mengajar> {
                     subtitle: GestureDetector(
                       onTap: () async {
                         if (!await launchUrl(
-                            Uri.parse("$bahan2"))) {
+                            Uri.parse(bahan2))) {
                           throw Exception('Could not launch $bahan2');
                         }
                       },

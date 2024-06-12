@@ -3,17 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/pelayan/my_firebase.dart';
 
 class DaftarIzin extends StatefulWidget {
-  const DaftarIzin({Key? key}) : super(key: key);
+  const DaftarIzin({super.key});
 
   @override
   State<DaftarIzin> createState() => _DaftarIzinState();
 }
 
 class _DaftarIzinState extends State<DaftarIzin> {
+
   bool isChecked = false;
+
+  bool selected = false;
+
 
   final izinSnapshot = MyFirebase.izinCollection.snapshots();
 
+  final MaterialStateProperty<Icon?> thumbIcon =
+      MaterialStateProperty.resolveWith<Icon?>(
+    (Set<MaterialState> states) {
+      if (states.contains(MaterialState.selected)) {
+        return const Icon(Icons.check);
+      }
+      return const Icon(Icons.close);
+    },
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,15 +63,61 @@ class _DaftarIzinState extends State<DaftarIzin> {
                   // documents[index].id;
 
                   return ListTile(
+<<<<<<< Updated upstream:lib/admin/Daftar Izin/daftarizin.dart
                     onTap: () {},
                     title: Text("$nama",
+=======
+                    title: Text(nama,
+>>>>>>> Stashed changes:lib/admin/daftarizin.dart
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                     subtitle: Text("$tanggal \n$alasan"),
                     isThreeLine: true,
+<<<<<<< Updated upstream:lib/admin/Daftar Izin/daftarizin.dart
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+=======
+
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Switch(
+                        //   thumbIcon: thumbIcon,
+                        //   value: selected,
+                        //   onChanged: (bool value) {
+                        //     setState(() {
+                        //      if(selected == false){
+                        //       selected = true;
+
+                        //      }else{
+                        //       selected = false;
+                        //      }
+
+                        //     });
+                        //   },
+                        // ),
+                        // Checkbox(
+                        //   tristate: false,
+                        //   isError: true,
+                        //   value: isChecked,
+
+                        //   onChanged: (bool? value) {
+                        //     setState(() {
+                        //       isChecked = value;
+                        // FirebaseFirestore.instance
+                        //     .collection('izin')
+                        //     .doc(documents[index].id)
+                        //     .set({
+                        //   'tanggal': tanggal,
+                        //   'nama': nama,
+                        //   'alasan': alasan,
+                        //   'status': "1",
+                        // });
+                        //     });
+                        //   },
+                        // ),
+>>>>>>> Stashed changes:lib/admin/daftarizin.dart
                         IconButton(
                           onPressed: () {
                             FirebaseFirestore.instance
@@ -76,6 +135,10 @@ class _DaftarIzinState extends State<DaftarIzin> {
                         ),
                       ],
                     ),
+<<<<<<< Updated upstream:lib/admin/Daftar Izin/daftarizin.dart
+=======
+                    //  trailing should be delete and edit button
+>>>>>>> Stashed changes:lib/admin/daftarizin.dart
                   );
                 },
               );

@@ -4,12 +4,12 @@ import 'package:kidsgbisukhat4/admin/Bahan/my_firebase.dart';
 
 class EditBahan extends StatefulWidget {
   const EditBahan({
-    Key? key,
+    super.key,
     required this.id,
     required this.bulan,
     required this.bahan,
     required this.keterangan,
-  }) : super(key: key);
+  });
   final String id;
 
   final String bulan;

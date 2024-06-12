@@ -5,7 +5,7 @@ import 'package:kidsgbisukhat4/admin/Bahan/my_firebase.dart';
 import 'package:kidsgbisukhat4/admin/Bahan/tambah_bahan_screen.dart';
 
 class BahanMengajar extends StatefulWidget {
-  const BahanMengajar({Key? key}) : super(key: key);
+  const BahanMengajar({super.key});
 
   @override
   State<BahanMengajar> createState() => _BahanMengajarState();
@@ -17,9 +17,9 @@ class _BahanMengajarState extends State<BahanMengajar> {
   void deleteContact(String id) async {
     await MyFirebase.bahansCollection.doc(id).delete();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Bahan berhasil dihapus'),
-        backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+      const SnackBar(
+        content: Text('Bahan berhasil dihapus'),
+        backgroundColor: Color.fromARGB(255, 99, 99, 99),
       ),
     );
   }

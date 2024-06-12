@@ -305,7 +305,7 @@ Future<void> _showExitConfirmationDialog(BuildContext context) async {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LogInScreen(),
+                    builder: (context) => const LogInScreen(),
                   ),
                   (route) => false);
             },

@@ -4,7 +4,7 @@ import 'package:kidsgbisukhat4/admin/DataPelayan/my_firebase.dart';
 import 'package:kidsgbisukhat4/admin/DataPelayan/tambahpelayan.dart';
 
 class DataGuru extends StatefulWidget {
-  const DataGuru({Key? key}) : super(key: key);
+  const DataGuru({super.key});
 
   @override
   State<DataGuru> createState() => _DataGuruState();
@@ -16,9 +16,9 @@ class _DataGuruState extends State<DataGuru> {
   void deleteContact(String id) async {
     await MyFirebase.usersCollection.doc(id).delete();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Data guru berhasil dihapus'),
-        backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+      const SnackBar(
+        content: Text('Data guru berhasil dihapus'),
+        backgroundColor: Color.fromARGB(255, 99, 99, 99),
       ),
     );
   }
@@ -60,11 +60,11 @@ class _DataGuruState extends State<DataGuru> {
                   return ListTile(
                     onTap: () {},
 
-                    title: Text("$email",
+                    title: Text(email,
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
 
-                    subtitle: Text("$nama"),
+                    subtitle: Text(nama),
                     isThreeLine: true,
                     //  trailing should be delete and edit button
                     trailing: Row(

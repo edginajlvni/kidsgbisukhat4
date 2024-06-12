@@ -49,7 +49,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         title:
             const Text("Tambah Data Pelayan",

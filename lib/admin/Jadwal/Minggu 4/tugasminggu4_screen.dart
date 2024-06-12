@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/minggu_4.dart';
 
 class TugasMinggu4Screen extends StatefulWidget {
-  const TugasMinggu4Screen({Key? key}) : super(key: key);
+  const TugasMinggu4Screen({super.key});
 
   @override
   State<TugasMinggu4Screen> createState() => _TugasMinggu4ScreenState();
@@ -62,7 +62,7 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jadwal Minggu 4"),
+        title: const Text("Jadwal Minggu 4"),
       ),
       body: jadwal.isEmpty
           ? const Center(
