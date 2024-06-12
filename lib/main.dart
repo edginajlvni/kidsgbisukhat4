@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
@@ -52,11 +53,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
-      home: isLogin
+      home:
+      isLogin
           ? dataUser['jabatan'] == 'Guru'
               ? const PelayanDashboard()
-              : const DashboardAdmin()
-          : const LogInScreen(),
+              : const DashboardAdmin() :
+              const LogInScreen(),
     );
   }
 }

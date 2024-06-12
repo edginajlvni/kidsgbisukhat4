@@ -20,10 +20,10 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   final _formKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
 
-   TextEditingController email = TextEditingController();
-   TextEditingController password = TextEditingController();
-   TextEditingController nama = TextEditingController();
-   TextEditingController jabatan = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController nama = TextEditingController();
+  TextEditingController jabatan = TextEditingController();
 
   bool _isObscure = true;
   File? file;
@@ -51,9 +51,9 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
-        title: const Text("Tambah Data Pelayan",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        centerTitle: true,
+        title:
+            const Text("Tambah Data Pelayan",
+            style: TextStyle(fontSize: 18)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -201,11 +201,8 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
-                                  signUp(
-                                      email.text,
-                                      password.text,
-                                      jabatan.text,
-                                      nama.text);
+                                  signUp(email.text, password.text,
+                                      jabatan.text, nama.text);
                                   clearText();
                                 });
                               }

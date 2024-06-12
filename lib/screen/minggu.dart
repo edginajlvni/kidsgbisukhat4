@@ -73,6 +73,10 @@ class _Minggu_4State extends State<Minggu_4> {
           jadwal.add(e['WL']);
           jadwal.add(e['Singer']);
           jadwal.add(e['Firman Kecil']);
+          jadwal.add(e['Firman Besar']);
+          jadwal.add(e['Multimedia']);
+          jadwal.add(e['Usher']);
+          jadwal.add(e['Doa']);
 
           setState(() {});
         }).toList());
@@ -105,14 +109,18 @@ class _Minggu_4State extends State<Minggu_4> {
             )
           : Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: ListView.builder(
-                itemBuilder: (context, index) => ListTile(
-                  title: Text("${posisi[index]}: ${jadwal[index]}"),
-                ),
-                itemCount: jadwal.length > posisi.length
-                    ? posisi.length
-                    : jadwal.length,
-              ),
+              child: StreamBuilder(
+                  stream: minggu4Stream,
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text("${posisi[index]}: ${jadwal[index]}"),
+                      ),
+                      itemCount: jadwal.length > posisi.length
+                          ? posisi.length
+                          : jadwal.length,
+                    );
+                  }),
             ),
 
       // body: StreamBuilder(
@@ -396,8 +404,76 @@ class Minggu_5 extends StatefulWidget {
 }
 
 class _Minggu_5State extends State<Minggu_5> {
+  final Stream<QuerySnapshot> minggu5Stream =
+      FirebaseFirestore.instance.collection('jadwal5').snapshots();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    allData();
+    alltugas();
+  }
+
+  final CollectionReference jadwalCollection =
+      FirebaseFirestore.instance.collection('jadwal');
+
+  final CollectionReference tugasCollection =
+      FirebaseFirestore.instance.collection('tugas_pel');
+
+  allData() async {
+    await jadwalCollection.get().then((value) => value.docs.map((e) {
+          jadwal.add(e['WL']);
+          jadwal.add(e['Singer']);
+          jadwal.add(e['Firman Kecil']);
+          jadwal.add(e['Firman Besar']);
+          jadwal.add(e['Multimedia']);
+          jadwal.add(e['Usher']);
+          jadwal.add(e['Doa']);
+
+          setState(() {});
+        }).toList());
+  }
+
+  alltugas() async {
+    await tugasCollection.get().then((value) => value.docs.map((e) {
+          posisi.add(e['tugas']);
+          setState(() {});
+        }).toList());
+  }
+
+  // allData() async {
+  //   await jadwalCollection.doc('minggu4').get().then((value) => print(value));
+
+  //   // await jadwalCollection.get().then((value) => value.docs.map((e) {
+  //   //       print(e.id);
+  //   //     }).toList());
+  // }
+
+  List<String> jadwal = [];
+  List<String> posisi = [];
+
   @override
   Widget build(BuildContext context) {
-    return const tugas();
+    return Scaffold(
+      body: jadwal.isEmpty
+          ? const Center(
+              child: Text('Belum Ada Data'),
+            )
+          : Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: StreamBuilder(
+                  stream: minggu5Stream,
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text("${posisi[index]}: ${jadwal[index]}"),
+                      ),
+                      itemCount: jadwal.length > posisi.length
+                          ? posisi.length
+                          : jadwal.length,
+                    );
+                  }),
+            ),
+    );
   }
 }

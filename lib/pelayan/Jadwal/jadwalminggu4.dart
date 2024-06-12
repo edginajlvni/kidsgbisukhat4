@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Minggu1 extends StatefulWidget {
-  const Minggu1({super.key});
+class TugasMinggu4 extends StatefulWidget {
+  const TugasMinggu4({super.key});
 
   @override
-  State<Minggu1> createState() => _Minggu1State();
+  State<TugasMinggu4> createState() => _TugasMinggu4State();
 }
 
-class _Minggu1State extends State<Minggu1> {
+class _TugasMinggu4State extends State<TugasMinggu4> {
   final Stream<QuerySnapshot> minggu4Stream =
       FirebaseFirestore.instance.collection('minggu4').snapshots();
+
+  final CollectionReference jadwalCollection =
+      FirebaseFirestore.instance.collection('jadwal');
   @override
   void initState() {
     // TODO: implement initState
@@ -18,9 +21,6 @@ class _Minggu1State extends State<Minggu1> {
     allData();
     alltugas();
   }
-
-  final CollectionReference jadwalCollection =
-      FirebaseFirestore.instance.collection('jadwal');
 
   final CollectionReference tugasCollection =
       FirebaseFirestore.instance.collection('tugas_pel');
@@ -30,6 +30,10 @@ class _Minggu1State extends State<Minggu1> {
           jadwal.add(e['WL']);
           jadwal.add(e['Singer']);
           jadwal.add(e['Firman Kecil']);
+          jadwal.add(e['Firman Besar']);
+          jadwal.add(e['Multimedia']);
+          jadwal.add(e['Usher']);
+          jadwal.add(e['Doa']);
 
           setState(() {});
         }).toList());
@@ -56,37 +60,28 @@ class _Minggu1State extends State<Minggu1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Jadwal Minggu 4"),
-      ),
       body: jadwal.isEmpty
           ? const Center(
-              child: Text('Belum Ada Data'),
+              child: Text('Belum ada jadwal.'),
             )
           : Padding(
               padding: const EdgeInsets.only(left: 10),
               child: ListView.builder(
                 itemBuilder: (context, index) => ListTile(
-                  title: Text("${posisi[index]}: ${jadwal[index]}"),
+                  title: Text(
+                    "${posisi[index]}: ",
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text("${jadwal[index]}"),
+
+                  // title: Text("${posisi[index]}: ${jadwal[index]}"),
                 ),
                 itemCount: jadwal.length > posisi.length
                     ? posisi.length
                     : jadwal.length,
               ),
             ),
-        floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Minggu1()),
-          );
-        },
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-      ),
     );
   }
 }

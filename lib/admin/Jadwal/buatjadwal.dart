@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%201/tugasminggu1.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%202/tugasminggu2.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%203/tugasminggu3_screen.dart';
 import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/tugasminggu4_screen.dart';
-import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%201/minggu_1.dart';
-import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%202/minggu_2.dart';
-import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%203/minggu_3.dart';
-import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/minggu_4.dart';
-import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/minggu_5.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%205/tugasminggu5.dart';
 
 class BuatJadwal extends StatefulWidget {
   const BuatJadwal({super.key});
@@ -38,7 +37,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Minggu1()));
+                            builder: (context) => const TugasMinggu1()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -67,7 +66,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Minggu2()));
+                            builder: (context) => const TugasMinggu2()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -96,7 +95,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Minggu3()));
+                            builder: (context) => const TugasMinggu3()));
                   },
                   child: Container(
                     width: double.infinity,
@@ -154,7 +153,7 @@ class _BuatJadwalState extends State<BuatJadwal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Minggu5()));
+                            builder: (context) => const TugasMinggu5()));
                   },
                   child: Container(
                     width: double.infinity,

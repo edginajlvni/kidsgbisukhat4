@@ -11,8 +11,7 @@ class DataGuru extends StatefulWidget {
 }
 
 class _DataGuruState extends State<DataGuru> {
-    final usersSnapshot = MyFirebase.usersCollection.snapshots();
-
+  final usersSnapshot = MyFirebase.usersCollection.snapshots();
 
   void deleteContact(String id) async {
     await MyFirebase.usersCollection.doc(id).delete();
@@ -71,23 +70,6 @@ class _DataGuruState extends State<DataGuru> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // IconButton(
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => EditBerita(
-                        //           id: contactId,
-                        //           berita: berita,
-                        //           waktu: waktu,
-                        //           keterangan: keterangan,
-                        //         ),
-                        //       ),
-                        //     );
-                        //   },
-                        //   splashRadius: 24,
-                        //   icon: const Icon(Icons.edit_outlined),
-                        // ),
                         IconButton(
                           onPressed: () {
                             deleteContact(contactId);
