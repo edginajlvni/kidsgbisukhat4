@@ -58,7 +58,7 @@ class _Minggu1State extends State<Minggu1> {
         elevation: 0,
         title: const Text("Minggu 1",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
             )),
         centerTitle: false,
       ),
