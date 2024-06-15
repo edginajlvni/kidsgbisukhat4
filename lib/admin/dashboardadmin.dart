@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/Bahan/bahan.dart';
 import 'package:kidsgbisukhat4/admin/Berita/berita_screen.dart';
 import 'package:kidsgbisukhat4/admin/DataPelayan/data_guru.dart';
 import 'package:kidsgbisukhat4/admin/Jadwal/buatjadwal.dart';
-import 'package:kidsgbisukhat4/admin/daftarizin.dart';
+import 'package:kidsgbisukhat4/admin/Daftar%20Izin/daftarizin.dart';
+import 'package:kidsgbisukhat4/admin/data_pelayan.dart';
+
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +20,21 @@ class DashboardAdmin extends StatefulWidget {
 }
 
 class _DashboardAdmin extends State<DashboardAdmin> {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUser();
+  }
+
+  Map<String, dynamic> dataUser = {};
+  getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    dataUser = jsonDecode(prefs.getString('userPref')!);
+
+    setState(() {});
+  }
+
   logout() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     auth.signOut();
@@ -27,7 +46,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 209, 242, 255),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
@@ -37,42 +56,31 @@ class _DashboardAdmin extends State<DashboardAdmin> {
               const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  width: double.infinity,
-                  height: 100,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 22,
-                    horizontal: 20,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 5),
-                              child: Text(
-                                "ADMIN",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 0, 0, 0)),
-                              ),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(width: 15),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              dataUser['nama'],
+                              // dataUser!['nama'],
+                              style: const TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Ruluko",
+                                  color: Color.fromARGB(255, 0, 0, 0)),
                             ),
-                          ],
-                        ),
-                      ]),
-                ),
+                          ),
+                        ],
+                      ),
+                    ]),
               ),
 
-              // profil pelayan
-              const SizedBox(height: 30),
+              SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: ListTile(
@@ -85,12 +93,15 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
+                  tileColor: const Color.fromARGB(255, 0, 0, 0),
                   leading: const Icon(
                     Icons.person_2,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  title: const Text("Data Pelayan"),
+                  title: const Text(
+                    "Data Pelayan",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
 
@@ -108,12 +119,15 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
+                  tileColor: const Color.fromARGB(255, 0, 0, 0),
                   leading: const Icon(
                     Icons.date_range,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  title: const Text("Buat Jadwal"),
+                  title: const Text(
+                    "Buat Jadwal",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
 
@@ -131,12 +145,15 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
+                  tileColor: const Color.fromARGB(255, 0, 0, 0),
                   leading: const Icon(
                     Icons.newspaper,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  title: const Text("Buat Berita"),
+                  title: const Text(
+                    "Buat Berita",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
 
@@ -154,12 +171,15 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
+                  tileColor: Color.fromARGB(255, 0, 0, 0),
                   leading: const Icon(
                     Icons.book,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  title: const Text("Bahan Mengajar"),
+                  title: const Text(
+                    "Bahan Mengajar",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
 
@@ -177,12 +197,15 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tileColor: const Color.fromARGB(255, 255, 255, 255),
+                  tileColor: Colors.black,
                   leading: const Icon(
                     Icons.fork_left,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  title: const Text("Daftar Pelayan Izin"),
+                  title: const Text(
+                    "Daftar Pelayan Izin",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
 

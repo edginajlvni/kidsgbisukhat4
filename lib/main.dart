@@ -52,11 +52,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
-      home: isLogin
-          ? dataUser['jabatan'] == 'Guru'
-              ? const PelayanDashboard()
-              : const DashboardAdmin()
-          : const LogInScreen(),
+      home:
+      isLogin
+          ? dataUser['jabatan'] == 'Admin'
+              ? const DashboardAdmin()
+              : const PelayanDashboard() :
+              const LogInScreen(),
     );
   }
 }

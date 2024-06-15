@@ -1,20 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%204/minggu_4.dart';
+import 'package:kidsgbisukhat4/admin/Jadwal/Minggu%202/minggu_2.dart';
 
-class TugasMinggu4Screen extends StatefulWidget {
-  const TugasMinggu4Screen({Key? key}) : super(key: key);
+class TugasMinggu2 extends StatefulWidget {
+  const TugasMinggu2({Key? key}) : super(key: key);
 
   @override
-  State<TugasMinggu4Screen> createState() => _TugasMinggu4ScreenState();
+  State<TugasMinggu2> createState() => _TugasMinggu2State();
 }
 
-class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
-  final Stream<QuerySnapshot> minggu4Stream =
-      FirebaseFirestore.instance.collection('minggu4').snapshots();
+class _TugasMinggu2State extends State<TugasMinggu2> {
+  final Stream<QuerySnapshot> minggu5Stream =
+      FirebaseFirestore.instance.collection('minggu2').snapshots();
 
-  final CollectionReference jadwalCollection =
-      FirebaseFirestore.instance.collection('jadwal');
   @override
   void initState() {
     // TODO: implement initState
@@ -25,6 +23,9 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
 
   final CollectionReference tugasCollection =
       FirebaseFirestore.instance.collection('tugas_pel');
+
+  final CollectionReference jadwalCollection =
+      FirebaseFirestore.instance.collection('minggu2');
 
   allData() async {
     await jadwalCollection.get().then((value) => value.docs.map((e) {
@@ -47,14 +48,6 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
         }).toList());
   }
 
-  // allData() async {
-  //   await jadwalCollection.doc('minggu4').get().then((value) => print(value));
-
-  //   // await jadwalCollection.get().then((value) => value.docs.map((e) {
-  //   //       print(e.id);
-  //   //     }).toList());
-  // }
-
   List<String> jadwal = [];
   List<String> posisi = [];
 
@@ -62,7 +55,7 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jadwal Minggu 4"),
+        title: const Text("Jadwal Minggu 2"),
       ),
       body: jadwal.isEmpty
           ? const Center(
@@ -70,25 +63,29 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
             )
           : Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: ListView.builder(
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(
-                    "${posisi[index]}: ",
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text("${jadwal[index]}"),
+              child: StreamBuilder<Object>(
+                  stream: minggu5Stream,
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text(
+                          "${posisi[index]}: ",
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text("${jadwal[index]}"),
 
-                  // title: Text("${posisi[index]}: ${jadwal[index]}"),
-                ),
-                itemCount: jadwal.length > posisi.length
-                    ? posisi.length
-                    : jadwal.length,
-              ),
+                        // title: Text("${posisi[index]}: ${jadwal[index]}"),
+                      ),
+                      itemCount: jadwal.length > posisi.length
+                          ? posisi.length
+                          : jadwal.length,
+                    );
+                  }),
             ),
       bottomSheet: Container(
         height: 60,
-        color: Colors.white,
+        color: Color.fromARGB(255, 255, 255, 255),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,13 +94,12 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Minggu4()),
+                    MaterialPageRoute(builder: (context) => const Minggu2()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                 ),
-                
                 child: const Text(
                   "Tambah",
                   style: TextStyle(color: Colors.black),
@@ -113,8 +109,8 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
                   // jadwal.removeAt(index);
                   // posisi.removeAt(index);
                   FirebaseFirestore.instance
-                      .collection('jadwal')
-                      .doc('minggu4')
+                      .collection('minggu2')
+                      .doc('jadwal2')
                       .set({
                     // "WL": "-",
                     // "Singer": "-",

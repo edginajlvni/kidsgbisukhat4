@@ -9,8 +9,6 @@ class Minggu3 extends StatefulWidget {
 }
 
 class _Minggu3State extends State<Minggu3> {
-  final List<String> _names = [];
-
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('users')
       .where('jabatan', isEqualTo: 'Guru')
@@ -37,7 +35,7 @@ class _Minggu3State extends State<Minggu3> {
 
   alltugas() async {
     await tugasCollection.get().then((value) => value.docs.map((e) {
-          tugas.add(e['tugas']);
+          posisi.add(e['tugas']);
           setState(() {});
         }).toList());
   }
@@ -50,32 +48,97 @@ class _Minggu3State extends State<Minggu3> {
   }
 
   final List<String> _nama = [];
-  final List<String> tugas = [];
+  final List<String> posisi = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Minggu 3",
-          style: TextStyle(
-            fontSize: 20,
-          ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text("Minggu 3",
+            style: TextStyle(
+              fontSize: 20,
+            )),
+        centerTitle: false,
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: _usersStream,
+          builder: (BuildContext context, snapshot) {
+            if (snapshot.hasData) {
+              final List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
+              if (documents.isEmpty) {
+                return const Center();
+              }
+              return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView.builder(
+                    itemCount: _nama.length > posisi.length
+                        ? posisi.length
+                        : _nama.length,
+                    itemBuilder: (context, index) => ListTile(
+                      title: Text(posisi[index]),
+                      subtitle: Text(_nama[index]),
+                    ),
+                  ));
+            }
+
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("An Error Occured"),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }),
+      bottomSheet: Container(
+        height: 60,
+        color: Color.fromARGB(255, 255, 255, 255),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+                onPressed: () {
+                  FirebaseFirestore.instance
+                      .collection('minggu3')
+                      .doc('jadwal3')
+                      .set({
+                    "WL": _nama[0],
+                    "Singer": _nama[1],
+                    "Firman Kecil": _nama[2],
+                    "Firman Besar": _nama[3],
+                    "Multimedia": _nama[4],
+                    "Usher": _nama[5],
+                    "Doa": _nama[6],
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                ),
+                child: const Text(
+                  "Upload",
+                  style: TextStyle(color: Colors.black),
+                )),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _nama.shuffle();
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                ),
+                child: const Text(
+                  "Random",
+                  style: TextStyle(color: Colors.black),
+                )),
+          ],
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-          title: Text(tugas[index]),
-          subtitle: Text("Nama: " + _nama[index]),
-        ),
-        itemCount: _nama.length > tugas.length ? tugas.length : _nama.length,
-      ),
-      floatingActionButton: ElevatedButton(
-          onPressed: () {
-            setState(() {
-              _nama.shuffle();
-            });
-          },
-          child: const Text("Random")),
     );
   }
 }

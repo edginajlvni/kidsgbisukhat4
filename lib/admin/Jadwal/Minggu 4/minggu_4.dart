@@ -47,133 +47,8 @@ class _Minggu4State extends State<Minggu4> {
     alltugas();
   }
 
-  // final CollectionReference minggu4 =
-  //     FirebaseFirestore.instance.collection('minggu4');
-
-  // final wlController = TextEditingController();
-  // final singerController = TextEditingController();
-  // final firmankecilController = TextEditingController();
-  // final firmanbesarController = TextEditingController();
-  // final mulmedController = TextEditingController();
-  // final usherController = TextEditingController();
-  // final doaController = TextEditingController();
-  // final seragamController = TextEditingController();
-
   final List<String> _nama = [];
   final List<String> posisi = [];
-
-  // Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
-  //   await showModalBottomSheet(
-  //       isScrollControlled: true,
-  //       context: context,
-  //       builder: (BuildContext ctx) {
-  //         return Padding(
-  //           padding: EdgeInsets.only(
-  //               top: 20,
-  //               right: 20,
-  //               left: 20,
-  //               bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               const Center(
-  //                 child: Text(
-  //                   "Masukkan Jadwal",
-  //                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: wlController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'WL',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: singerController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Singer',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: firmankecilController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Firman Kelas Kecil',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: firmanbesarController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Firman Kelas Besar',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: mulmedController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Multimedia',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: usherController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Usher',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: seragamController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Seragam',
-  //                 ),
-  //               ),
-  //               TextField(
-  //                 controller: doaController,
-  //                 decoration: const InputDecoration(
-  //                   labelText: 'Doa',
-  //                 ),
-  //               ),
-  //               const SizedBox(
-  //                 height: 10,
-  //               ),
-  //               Center(
-  //                 child: ElevatedButton(
-  //                     onPressed: () async {
-  //                       final String wl = wlController.text;
-  //                       final String singer = singerController.text;
-  //                       final String firmankecil = firmankecilController.text;
-  //                       final String firmanbesar = firmanbesarController.text;
-  //                       final String multimedia = mulmedController.text;
-  //                       final String usher = usherController.text;
-  //                       final String doa = doaController.text;
-  //                       final String seragam = seragamController.text;
-
-  //                       await minggu4.add({
-  //                         "WL": wl,
-  //                         "Singer": singer,
-  //                         "Firman Kecil": firmankecil,
-  //                         "FIrman Besar": firmanbesar,
-  //                         "Multimedia": multimedia,
-  //                         "Usher": usher,
-  //                         "Doa": doa,
-  //                         "Seragam": seragam,
-  //                       });
-  //                       wlController.text = '';
-  //                       singerController.text = '';
-  //                       firmankecilController.text = '';
-  //                       firmanbesarController.text = '';
-  //                       mulmedController.text = '';
-  //                       usherController.text = '';
-  //                       doaController.text = '';
-  //                       seragamController.text = '';
-
-  //                       Navigator.of(context).pop();
-  //                     },
-  //                     child: const Text("Create")),
-  //               )
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -206,13 +81,6 @@ class _Minggu4State extends State<Minggu4> {
                     itemBuilder: (context, index) => ListTile(
                       title: Text(posisi[index]),
                       subtitle: Text(_nama[index]),
-                      // trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                      //   IconButton(
-                      //     onPressed: () {},
-                      //     splashRadius: 24,
-                      //     icon: const Icon(Icons.add_outlined),
-                      //   ),
-                      // ]),
                     ),
                   ));
             }
@@ -228,7 +96,7 @@ class _Minggu4State extends State<Minggu4> {
           }),
       bottomSheet: Container(
         height: 60,
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -241,21 +109,33 @@ class _Minggu4State extends State<Minggu4> {
                       .set({
                     "WL": _nama[0],
                     "Singer": _nama[1],
-                    "Firman Kecil":_nama[2],
-                    "Firman Besar": '',
-                    "Multimedia": '',
-                    "Usher": '',
-                    "Doa": ''
+                    "Firman Kecil": _nama[2],
+                    "Firman Besar": _nama[3],
+                    "Multimedia": _nama[4],
+                    "Usher": _nama[5],
+                    "Doa": _nama[6],
                   });
                 },
-                child: const Text("Tambah")),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                ),
+                child: const Text(
+                  "Upload",
+                  style: TextStyle(color: Colors.black),
+                )),
             ElevatedButton(
                 onPressed: () {
                   setState(() {
                     _nama.shuffle();
                   });
                 },
-                child: const Text("Random")),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                ),
+                child: const Text(
+                  "Random",
+                  style: TextStyle(color: Colors.black),
+                )),
           ],
         ),
       ),

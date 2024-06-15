@@ -75,7 +75,7 @@ class _DaftarPengajuanState extends State<DaftarPengajuan> {
                   final String tanggal = izin['tanggal'];
                   final String alasan = izin['alasan'];
                   final String status =
-                      izin['status'] == "0" ? "Belum Dibaca" : "Sudah dibaca";
+                      izin['status'] == "0" ? "Belum Disetujui" :  "Tidak Disetujui";
 
                   return ListTile(
                     onTap: () {},

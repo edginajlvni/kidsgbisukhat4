@@ -8,7 +8,6 @@ import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/models/user_model.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
 
-import 'package:kidsgbisukhat4/pelayan/dashboardpelayan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -39,7 +38,7 @@ class _LogInScreenState extends State<LogInScreen> {
             key: _formKey,
             child: Column(children: [
               const Padding(
-                padding: EdgeInsets.only(right: 25, left: 25, top: 30),
+                padding: EdgeInsets.only(right: 25, left: 25, top: 80),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,7 +47,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Halo,",
+                            "Shalom,",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 25,
@@ -242,7 +241,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const DashboardPelayan(
+              builder: (context) => const PelayanDashboard(
                   // nama: documentSnapshot.get('nama'),
                   ),
             ),

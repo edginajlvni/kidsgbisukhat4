@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kidsgbisukhat4/pelayan/berita_page.dart';
+import 'package:kidsgbisukhat4/pelayan/Berita/berita_page.dart';
 import 'package:kidsgbisukhat4/pelayan/daftarpengajuan.dart';
 import 'package:kidsgbisukhat4/pelayan/jadwalpelayanan.dart';
 import 'package:kidsgbisukhat4/pelayan/unduhbahan.dart';
@@ -44,7 +44,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.only(top: 30, left: 5, right: 20),
@@ -53,7 +53,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
           children: [
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(bottom: 10, left: 15),
               child: Row(children: [
                 const SizedBox(width: 15),
                 Column(
@@ -62,9 +62,9 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                     const Padding(
                       padding: EdgeInsets.only(bottom: 5),
                       child: Text(
-                        "Selamat datang, ",
+                        "Shallom, ",
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 25,
                             fontFamily: "Sansita",
                             color: Color.fromARGB(255, 0, 0, 0)),
                       ),
@@ -72,10 +72,10 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Text(
-                        dataUser['nama'] + "!",
+                        "Kak " + dataUser['nama'] + "!",
                         // dataUser!['nama'],
                         style: const TextStyle(
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             fontFamily: "Ruluko",
                             color: Color.fromARGB(255, 0, 0, 0)),
@@ -94,7 +94,7 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
               ]),
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 10),
             const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
@@ -235,9 +235,9 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                     child: const Center(
                       child: Text("Keluar",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 18,
-                              )),
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 18,
+                          )),
                     ),
                   ),
                 ),

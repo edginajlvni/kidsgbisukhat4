@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Minggu2 extends StatefulWidget {
-  const Minggu2({Key? key}) : super(key: key);
+class Minggu5 extends StatefulWidget {
+  const Minggu5({Key? key}) : super(key: key);
 
   @override
-  State<Minggu2> createState() => _Minggu2State();
+  State<Minggu5> createState() => _Minggu5State();
 }
 
-class _Minggu2State extends State<Minggu2> {
+class _Minggu5State extends State<Minggu5> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('users')
       .where('jabatan', isEqualTo: 'Guru')
@@ -56,7 +56,7 @@ class _Minggu2State extends State<Minggu2> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text("Minggu 2",
+        title: const Text("Minggu 5",
             style: TextStyle(
               fontSize: 20,
             )),
@@ -104,8 +104,8 @@ class _Minggu2State extends State<Minggu2> {
             ElevatedButton(
                 onPressed: () {
                   FirebaseFirestore.instance
-                      .collection('minggu2')
-                      .doc('jadwal2')
+                      .collection('minggu5')
+                      .doc('jadwal5')
                       .set({
                     "WL": _nama[0],
                     "Singer": _nama[1],

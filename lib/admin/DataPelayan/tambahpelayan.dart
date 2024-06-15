@@ -20,10 +20,10 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   final _formKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
 
-   TextEditingController email = TextEditingController();
-   TextEditingController password = TextEditingController();
-   TextEditingController nama = TextEditingController();
-   TextEditingController jabatan = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController nama = TextEditingController();
+  TextEditingController jabatan = TextEditingController();
 
   bool _isObscure = true;
   File? file;
@@ -51,9 +51,9 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
-        title: const Text("Tambah Data Pelayan",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        centerTitle: true,
+        title:
+            const Text("Tambah Data Pelayan",
+            style: TextStyle(fontSize: 18)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -132,16 +132,17 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                     child: TextFormField(
                       controller: password,
                       decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              icon: Icon(_isObscure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility),
-                              onPressed: () {
-                                setState(() {
-                                  _isObscure = !_isObscure;
-                                });
-                              }),
-                          labelText: 'Password',
+                          // suffixIcon: IconButton(
+                          //     icon: Icon(_isObscure
+                          //         ? Icons.visibility_off
+                          //         : Icons.visibility),
+                          //     onPressed: () {
+                                // setState(() {
+                                //   _isObscure = !_isObscure;
+                                // });
+                          //     }),
+                          labelText: 'Tanggal Lahir',
+                          hintText: 'DDMMYYYY',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(color: Colors.black),
@@ -151,13 +152,10 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                               borderSide:
                                   const BorderSide(color: Colors.black))),
                       validator: (value) {
-                        RegExp regex = RegExp(r'^.{6,}$');
                         if (value!.isEmpty) {
-                          return "Password cannot be empty";
+                          return "Wajib diisi";
                         }
-                        if (!regex.hasMatch(value)) {
-                          return ("please enter valid password min. 6 character");
-                        } else {
+                       else {
                           return null;
                         }
                       },
@@ -179,7 +177,10 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide:
-                                  const BorderSide(color: Colors.black))),
+                                  const BorderSide(color: Colors.black),
+                                  ),
+                                 // enabled: false
+                                  ),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Harap diisi";
@@ -201,11 +202,8 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
-                                  signUp(
-                                      email.text,
-                                      password.text,
-                                      jabatan.text,
-                                      nama.text);
+                                  signUp(email.text, password.text,
+                                      jabatan.text, nama.text);
                                   clearText();
                                 });
                               }

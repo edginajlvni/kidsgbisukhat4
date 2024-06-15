@@ -10,7 +10,7 @@ class DaftarIzin extends StatefulWidget {
 }
 
 class _DaftarIzinState extends State<DaftarIzin> {
-    bool isChecked = false;
+  bool isChecked = false;
 
   final izinSnapshot = MyFirebase.izinCollection.snapshots();
 
@@ -51,36 +51,31 @@ class _DaftarIzinState extends State<DaftarIzin> {
 
                   return ListTile(
                     onTap: () {},
-
                     title: Text("$nama",
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
-
                     subtitle: Text("$tanggal \n$alasan"),
                     isThreeLine: true,
-
-                    // trailing: Row(
-                    //   mainAxisSize: MainAxisSize.min,
-                    //   children: [
-                    //     IconButton(
-                    //       onPressed: () {
-                    //         FirebaseFirestore.instance
-                    //             .collection('izin')
-                    //             .doc(documents[index].id)
-                    //             .set({
-                    //           'tanggal': tanggal,
-                    //           'nama': nama,
-                    //           'alasan': alasan,
-                    //           'status': "1",
-                    //         });
-                    //       },
-                    //       splashRadius: 24,
-                    //       icon: const Icon(
-                    //           Icons.check),
-                    //     ),
-                    //   ],
-                    // ),
-                    //  trailing should be delete and edit button
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            FirebaseFirestore.instance
+                                .collection('izin')
+                                .doc(documents[index].id)
+                                .set({
+                              'tanggal': tanggal,
+                              'nama': nama,
+                              'alasan': alasan,
+                              'status': "1",
+                            });
+                          },
+                          splashRadius: 24,
+                          icon: const Icon(Icons.check),
+                        ),
+                      ],
+                    ),
                   );
                 },
               );
