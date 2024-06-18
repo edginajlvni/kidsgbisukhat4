@@ -120,6 +120,12 @@ class _TugasMinggu1State extends State<TugasMinggu1> {
                     // "Usher": "-",
                     // "Doa": "-",
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Jadwal berhasil dihapus'),
+                      backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,

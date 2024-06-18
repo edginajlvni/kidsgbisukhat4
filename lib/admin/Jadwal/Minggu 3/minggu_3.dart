@@ -115,6 +115,12 @@ class _Minggu3State extends State<Minggu3> {
                     "Usher": _nama[5],
                     "Doa": _nama[6],
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Jadwal berhasil di-upload'),
+                      backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,

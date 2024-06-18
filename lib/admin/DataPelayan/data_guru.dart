@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kidsgbisukhat4/admin/DataPelayan/lihat_guru.dart';
 import 'package:kidsgbisukhat4/admin/DataPelayan/my_firebase.dart';
 import 'package:kidsgbisukhat4/admin/DataPelayan/tambahpelayan.dart';
 
@@ -56,17 +57,32 @@ class _DataGuruState extends State<DataGuru> {
                   final users = documents[index].data() as Map<String, dynamic>;
                   final String email = users['email'];
                   final String nama = users['nama'];
+                  final String jabatan = users['jabatan'];
+                  final String password = users['password'];
 
                   return ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => lihatguru(
+                            id: contactId,
+                            nama: nama,
+                            email: email,
+                            password: password,
+                          ),
+                        ),
+                      );
+                    },
 
                     title: Text("$email",
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
 
-                    subtitle: Text("$nama"),
+                    subtitle: Text("Nama: " + "$nama \nJabatan: $jabatan"),
                     isThreeLine: true,
                     //  trailing should be delete and edit button
+
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

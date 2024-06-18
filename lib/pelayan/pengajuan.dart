@@ -41,8 +41,14 @@ class _PengajuanState extends State<Pengajuan> {
           'tanggal': tanggalController.text.trim(),
           'nama': namaController.text.trim(),
           'alasan': alasanControler.text.trim(),
-          'status' : "0",
+          'status': "0",
         });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Izin berhasil diajukan'),
+            backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+          ),
+        );
         Navigator.pop(context);
       } on FirebaseException {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -84,13 +90,6 @@ class _PengajuanState extends State<Pengajuan> {
                 TextFormField(
                   controller: namaController,
                   enabled: false,
-                  keyboardType: TextInputType.text,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Harap diisi";
-                    }
-                    return null;
-                  },
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     hintText: "Nama",
@@ -108,7 +107,7 @@ class _PengajuanState extends State<Pengajuan> {
                     return null;
                   },
                   decoration: const InputDecoration(
-                    hintText: "Tanggal",
+                    hintText: "Tanggal: (01 Januari 2024)",
                   ),
                 ),
                 const SizedBox(height: 20),

@@ -31,6 +31,12 @@ class _TambahBeritaState extends State<TambahBerita> {
           'waktu': waktuController.text.trim(),
           'keterangan': keteranganController.text.trim(),
         });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Berita berhasil ditambahkan'),
+            backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+          ),
+        );
         Navigator.pop(context);
       } on FirebaseException {
         ScaffoldMessenger.of(context).showSnackBar(

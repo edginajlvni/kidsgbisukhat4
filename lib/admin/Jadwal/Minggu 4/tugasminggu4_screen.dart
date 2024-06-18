@@ -103,7 +103,6 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                 ),
-                
                 child: const Text(
                   "Tambah",
                   style: TextStyle(color: Colors.black),
@@ -124,6 +123,12 @@ class _TugasMinggu4ScreenState extends State<TugasMinggu4Screen> {
                     // "Usher": "-",
                     // "Doa": "-",
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Jadwal berhasil dihapus'),
+                      backgroundColor: const Color.fromARGB(255, 99, 99, 99),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,

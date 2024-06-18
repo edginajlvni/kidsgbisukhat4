@@ -43,7 +43,7 @@ class _EditBeritaState extends State<EditBerita> {
     keteranganController.dispose();
   }
 
-  void EditBahan() async {
+  void EditBerita() async {
     if (_formKey.currentState!.validate()) {
       try {
         await MyFirebase.newsCollection.doc(widget.id).update({
@@ -75,7 +75,7 @@ class _EditBeritaState extends State<EditBerita> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Bahan"),
+        title: const Text("Edit Berita"),
       ),
       body: ListView(
         padding: const EdgeInsets.all(14),
@@ -95,7 +95,7 @@ class _EditBeritaState extends State<EditBerita> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
-                    hintText: "Bulan",
+                    hintText: "Berita",
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -110,7 +110,7 @@ class _EditBeritaState extends State<EditBerita> {
                     return null;
                   },
                   decoration: const InputDecoration(
-                    hintText: "Bahan",
+                    hintText: "Waktu",
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -132,9 +132,9 @@ class _EditBeritaState extends State<EditBerita> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
-                    onPressed: EditBahan,
+                    onPressed: EditBerita,
                     child: const Text(
-                      "Edit Bahan",
+                      "Edit Berita",
                       style: TextStyle(color: Colors.white),
                     )),
               ],

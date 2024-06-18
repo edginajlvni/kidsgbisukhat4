@@ -14,23 +14,23 @@ class JadwalPelayanan extends StatefulWidget {
 
 class _JadwalPelayananState extends State<JadwalPelayanan>
     with SingleTickerProviderStateMixin {
-  TabController? controller;
-  final screentitle = ['1', '2', '3', '4', '5'];
+  // TabController? controller;
+  // final screentitle = ['1', '2', '3', '4', '5'];
 
-  @override
-  void initState() {
-    controller = TabController(length: 5, vsync: this);
-    controller!.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   controller = TabController(length: 5, vsync: this);
+  //   controller!.addListener(() {
+  //     setState(() {});
+  //   });
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    controller!.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   controller!.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

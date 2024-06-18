@@ -47,6 +47,11 @@ class _DaftarIzinState extends State<DaftarIzin> {
                   final String nama = izin['nama'];
                   final String tanggal = izin['tanggal'];
                   final String alasan = izin['alasan'];
+                  final String status = izin['status'] == "0"
+                      ? "Belum Ditanggapi"
+                      : izin['status'] == "1"
+                          ? "Disetujui"
+                          : "Tidak Disetujui";
                   // documents[index].id;
 
                   return ListTile(
@@ -54,7 +59,7 @@ class _DaftarIzinState extends State<DaftarIzin> {
                     title: Text("$nama",
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
-                    subtitle: Text("$tanggal \n$alasan"),
+                    subtitle: Text("$tanggal \n$alasan \n$status"),
                     isThreeLine: true,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -70,9 +75,32 @@ class _DaftarIzinState extends State<DaftarIzin> {
                               'alasan': alasan,
                               'status': "1",
                             });
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   SnackBar(
+                            //     content:
+                            //         const Text('Berhasil tidak disetujui'),
+                            //     backgroundColor:
+                            //         const Color.fromARGB(255, 99, 99, 99),
+                            //   ),
+                            // );
                           },
                           splashRadius: 24,
                           icon: const Icon(Icons.check),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            FirebaseFirestore.instance
+                                .collection('izin')
+                                .doc(documents[index].id)
+                                .set({
+                              'tanggal': tanggal,
+                              'nama': nama,
+                              'alasan': alasan,
+                              'status': "2",
+                            });
+                          },
+                          splashRadius: 24,
+                          icon: const Icon(Icons.close),
                         ),
                       ],
                     ),
