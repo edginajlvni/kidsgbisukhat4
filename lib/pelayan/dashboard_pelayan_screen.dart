@@ -233,11 +233,10 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                       borderRadius: BorderRadius.circular(90),
                     ),
                     child: const Center(
-                      child: Text("Keluar",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 18,
-                          )),
+                      child: Text(
+                        "Keluar",
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

@@ -7,8 +7,6 @@ import 'package:kidsgbisukhat4/admin/Berita/berita_screen.dart';
 import 'package:kidsgbisukhat4/admin/DataPelayan/data_guru.dart';
 import 'package:kidsgbisukhat4/admin/Jadwal/buatjadwal.dart';
 import 'package:kidsgbisukhat4/admin/Daftar%20Izin/daftarizin.dart';
-import 'package:kidsgbisukhat4/admin/data_pelayan.dart';
-
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -233,11 +231,12 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                         borderRadius: BorderRadius.circular(90),
                       ),
                       child: const Center(
-                        child: Text("Keluar",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 18,
-                            )),
+                        child: const Center(
+                          child: Text(
+                            "Keluar",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
                       ),
                     ),
                   ),

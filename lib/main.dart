@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
+import 'package:kidsgbisukhat4/pelayan/DB_Pelayan.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,12 +52,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(),
+      theme: ThemeData.light(),
       home:
       isLogin
           ? dataUser['jabatan'] == 'Admin'
               ? const DashboardAdmin()
-              : const PelayanDashboard() :
+              : const HomePagePelayan() :
               const LogInScreen(),
     );
   }

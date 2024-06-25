@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/models/user_model.dart';
+import 'package:kidsgbisukhat4/pelayan/DB_Pelayan.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +39,7 @@ class _LogInScreenState extends State<LogInScreen> {
             key: _formKey,
             child: Column(children: [
               const Padding(
-                padding: EdgeInsets.only(right: 25, left: 25, top: 80),
+                padding: EdgeInsets.only(right: 25, left: 25, top: 100),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -47,10 +48,11 @@ class _LogInScreenState extends State<LogInScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Shalom,",
+                            "Hello,",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 25,
+                              fontWeight: FontWeight.w700,
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
@@ -84,11 +86,11 @@ class _LogInScreenState extends State<LogInScreen> {
                 height: 100,
               ),
               Container(
-                width: 500,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(210, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(20)),
+                // width: 500,
+                // margin: const EdgeInsets.symmetric(horizontal: 20),
+                // decoration: BoxDecoration(
+                //     color: const Color.fromARGB(210, 0, 0, 0),
+                //     borderRadius: BorderRadius.circular(20)),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 75),
                 child: Column(
@@ -103,30 +105,32 @@ class _LogInScreenState extends State<LogInScreen> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0))),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide:
+                              BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                         ),
                         prefixIcon: Icon(
                           Icons.people,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 0, 0, 0),
                           size: 18,
                         ),
                         label: Text(
                           'Email',
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Colors.black,
                               fontSize: 16),
                         ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Email cannot be empty";
+                          return "Harap masukkan email";
                         }
                         if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                             .hasMatch(value)) {
-                          return ("Please enter a valid email");
+                          return ("Harap masukkan email yang benar");
                         } else {
                           return null;
                         }
@@ -135,20 +139,20 @@ class _LogInScreenState extends State<LogInScreen> {
                         emailController.text = value!;
                       },
                       style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Color.fromARGB(255, 255, 255, 255)),
+                          fontWeight: FontWeight.normal, color: Colors.black),
                     ),
                     TextFormField(
                       controller: passwordController,
                       obscureText: _isSecurePassword,
                       decoration: InputDecoration(
                         enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0))),
                         focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.black)),
                         prefixIcon: const Icon(
-                          Icons.people,
-                          color: Colors.white,
+                          Icons.lock,
+                          color: Color.fromARGB(255, 0, 0, 0),
                           size: 18,
                         ),
                         suffixIcon: buttonPassword(),
@@ -156,16 +160,16 @@ class _LogInScreenState extends State<LogInScreen> {
                           'Password',
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
-                              color: Color.fromARGB(255, 255, 255, 255)),
+                              color: Color.fromARGB(255, 0, 0, 0)),
                         ),
                       ),
                       validator: (value) {
                         RegExp regex = RegExp(r'^.{6,}$');
                         if (value!.isEmpty) {
-                          return "Password cannot be empty";
+                          return "Harap masukkan password";
                         }
                         if (!regex.hasMatch(value)) {
-                          return ("please enter valid password min. 6 character");
+                          return ("Password kurang dari enam karakter");
                         } else {
                           return null;
                         }
@@ -175,9 +179,9 @@ class _LogInScreenState extends State<LogInScreen> {
                       },
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
-                          color: Color.fromARGB(255, 255, 255, 255)),
+                          color: Color.fromARGB(255, 0, 0, 0)),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     MaterialButton(
                       shape: const RoundedRectangleBorder(
                           borderRadius:
@@ -193,12 +197,12 @@ class _LogInScreenState extends State<LogInScreen> {
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(100)),
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            borderRadius: BorderRadius.circular(10)),
                         child: const Center(
                           child: Text("Log In",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 20,
                               )),
                         ),
@@ -224,7 +228,7 @@ class _LogInScreenState extends State<LogInScreen> {
       icon: _isSecurePassword
           ? const Icon(Icons.visibility)
           : const Icon(Icons.visibility_off),
-      color: Colors.white,
+      color: const Color.fromARGB(255, 0, 0, 0),
     );
   }
 
@@ -286,7 +290,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => PelayanDashboard(),
+                builder: (context) => HomePagePelayan(),
               ));
         } else {
           Navigator.pushReplacement(
@@ -296,11 +300,20 @@ class _LogInScreenState extends State<LogInScreen> {
               ));
         }
       } on FirebaseAuthException catch (e) {
+        String message = '';
         if (e.code == 'user-not-found') {
-          print('No user found for that email.');
+          message = 'Email salah.';
         } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
+          message = 'Password salah.';
+        } else {
+          message = 'Email atau password salah.';
         }
+        ;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(message),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          // duration: const Duration(seconds: 1),
+        ));
       }
     }
   }
