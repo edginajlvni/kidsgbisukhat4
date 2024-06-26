@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/pelayan/DB_Pelayan.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
+import 'package:kidsgbisukhat4/pelayan/dashboard_screen.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

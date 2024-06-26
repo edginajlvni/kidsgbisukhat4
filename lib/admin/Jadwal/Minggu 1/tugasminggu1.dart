@@ -10,7 +10,7 @@ class TugasMinggu1 extends StatefulWidget {
 }
 
 class _TugasMinggu1State extends State<TugasMinggu1> {
-  final Stream<QuerySnapshot> minggu5Stream =
+  final Stream<QuerySnapshot> minggu1Stream =
       FirebaseFirestore.instance.collection('minggu1').snapshots();
 
   @override
@@ -64,7 +64,7 @@ class _TugasMinggu1State extends State<TugasMinggu1> {
           : Padding(
               padding: const EdgeInsets.only(left: 10),
               child: StreamBuilder<Object>(
-                  stream: minggu5Stream,
+                  stream: minggu1Stream,
                   builder: (context, snapshot) {
                     return ListView.builder(
                       itemBuilder: (context, index) => ListTile(

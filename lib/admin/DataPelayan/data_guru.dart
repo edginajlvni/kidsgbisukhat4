@@ -12,8 +12,10 @@ class DataGuru extends StatefulWidget {
 }
 
 class _DataGuruState extends State<DataGuru> {
-  final usersSnapshot = MyFirebase.usersCollection.snapshots();
-
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+      .collection('users')
+      .where('jabatan', isEqualTo: 'Guru')
+      .snapshots();
   void deleteContact(String id) async {
     await MyFirebase.usersCollection.doc(id).delete();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -37,7 +39,7 @@ class _DataGuruState extends State<DataGuru> {
         centerTitle: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: usersSnapshot,
+          stream: _usersStream,
           builder: (BuildContext context, snapshot) {
             if (snapshot.hasData) {
               final List<QueryDocumentSnapshot> documents = snapshot.data!.docs;

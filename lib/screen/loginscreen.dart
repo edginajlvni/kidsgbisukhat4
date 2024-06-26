@@ -8,6 +8,7 @@ import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/models/user_model.dart';
 import 'package:kidsgbisukhat4/pelayan/DB_Pelayan.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
+import 'package:kidsgbisukhat4/pelayan/dashboard_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +40,7 @@ class _LogInScreenState extends State<LogInScreen> {
             key: _formKey,
             child: Column(children: [
               const Padding(
-                padding: EdgeInsets.only(right: 25, left: 25, top: 100),
+                padding: EdgeInsets.only(right: 25, left: 25, top: 80),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,7 +49,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Hello,",
+                            "Shallom,",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 25,
@@ -112,7 +113,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
                         ),
                         prefixIcon: Icon(
-                          Icons.people,
+                          Icons.email,
                           color: Color.fromARGB(255, 0, 0, 0),
                           size: 18,
                         ),
@@ -245,7 +246,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const PelayanDashboard(
+              builder: (context) => const DashBoardScreen(
                   // nama: documentSnapshot.get('nama'),
                   ),
             ),
