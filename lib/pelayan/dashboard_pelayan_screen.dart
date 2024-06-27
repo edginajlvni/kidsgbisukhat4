@@ -229,8 +229,8 @@ class _PelayanDashboardState extends State<PelayanDashboard> {
                     height: 35,
                     width: 110,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      borderRadius: BorderRadius.circular(90),
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Center(
                       child: Text(

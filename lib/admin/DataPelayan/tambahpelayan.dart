@@ -12,10 +12,20 @@ class TambahDataPelayan extends StatefulWidget {
 }
 
 class _TambahDataPelayan extends State<TambahDataPelayan> {
+  final List<String> data = ['Aktif', 'Tidak Aktif'];
+  String selecteditem = 'Aktif';
+
   _TambahDataPelayan();
 
   bool showProgress = false;
   bool visible = false;
+  File? file;
+  var options = [
+    'Aktif',
+    'Tidak Aktif',
+  ];
+  var _currentItemSelected = "Aktif";
+  var status = "Aktif";
 
   final _formKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
@@ -26,7 +36,6 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   TextEditingController jabatan = TextEditingController();
 
   bool _isObscure = true;
-  File? file;
 
   @override
   void dispose() {
@@ -52,8 +61,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         title:
-            const Text("Tambah Data Pelayan",
-            style: TextStyle(fontSize: 18)),
+            const Text("Tambah Data Pelayan", style: TextStyle(fontSize: 18)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -137,9 +145,9 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                           //         ? Icons.visibility_off
                           //         : Icons.visibility),
                           //     onPressed: () {
-                                // setState(() {
-                                //   _isObscure = !_isObscure;
-                                // });
+                          // setState(() {
+                          //   _isObscure = !_isObscure;
+                          // });
                           //     }),
                           labelText: 'Tanggal Lahir',
                           hintText: 'DDMMYYYY',
@@ -154,8 +162,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Wajib diisi";
-                        }
-                       else {
+                        } else {
                           return null;
                         }
                       },
@@ -169,18 +176,17 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                     child: TextFormField(
                       controller: jabatan,
                       decoration: InputDecoration(
-                          labelText: 'Jabatan',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(color: Colors.black),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide:
-                                  const BorderSide(color: Colors.black),
-                                  ),
-                                 // enabled: false
-                                  ),
+                        labelText: 'Jabatan',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.black),
+                        ),
+                        // enabled: false
+                      ),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Harap diisi";
@@ -188,6 +194,41 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                         return null;
                       },
                       onChanged: (value) {},
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 19),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Status: ",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        DropdownButton<String>(
+                          items: options.map((String dropDownStringItem) {
+                            return DropdownMenuItem(
+                              value: dropDownStringItem,
+                              child: Text(
+                                dropDownStringItem,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValueSelected) {
+                            setState(() {
+                              _currentItemSelected = newValueSelected!;
+                              status = newValueSelected;
+                            });
+                          },
+                          value: _currentItemSelected,
+                          icon: const Icon(Icons.arrow_drop_down),
+                        ),
+                      ],
                     ),
                   ),
 
@@ -203,7 +244,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
                                   signUp(email.text, password.text,
-                                      jabatan.text, nama.text);
+                                      jabatan.text, nama.text, status);
                                   clearText();
                                 });
                               }
@@ -264,21 +305,24 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
     );
   }
 
-  void signUp(
-      String email, String password, String jabatan, String nama) async {
+  void signUp(String email, String password, String jabatan, String nama,
+      String status) async {
     const CircularProgressIndicator();
     if (_formKey.currentState!.validate()) {
       await auth
-          .createUserWithEmailAndPassword(email: email, password: password)
+          .createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          )
           .then((value) =>
-              {postDetailsToFirestore(email, jabatan, password, nama)})
+              {postDetailsToFirestore(email, jabatan, password, nama, status)})
           // ignore: body_might_complete_normally_catch_error
           .catchError((e) {});
     }
   }
 
-  postDetailsToFirestore(
-      String email, String jabatan, String password, String nama) async {
+  postDetailsToFirestore(String email, String jabatan, String password,
+      String nama, String status) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     var user = auth.currentUser;
 
@@ -288,6 +332,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
       'jabatan': jabatan,
       'password': password,
       'nama': nama,
+      'status': status,
     });
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => const DashboardAdmin()));

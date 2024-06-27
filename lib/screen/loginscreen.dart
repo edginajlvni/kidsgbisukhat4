@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:kidsgbisukhat4/admin/dashboardadmin.dart';
 import 'package:kidsgbisukhat4/models/user_model.dart';
-import 'package:kidsgbisukhat4/pelayan/DB_Pelayan.dart';
 import 'package:kidsgbisukhat4/pelayan/dashboard_pelayan_screen.dart';
-import 'package:kidsgbisukhat4/pelayan/dashboard_screen.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -246,7 +243,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const DashBoardScreen(
+              builder: (context) => const PelayanDashboard(
                   // nama: documentSnapshot.get('nama'),
                   ),
             ),
@@ -291,7 +288,7 @@ class _LogInScreenState extends State<LogInScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePagePelayan(),
+                builder: (context) => PelayanDashboard(),
               ));
         } else {
           Navigator.pushReplacement(
