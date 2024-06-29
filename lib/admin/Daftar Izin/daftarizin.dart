@@ -75,6 +75,17 @@ class _DaftarIzinState extends State<DaftarIzin> {
                               'alasan': alasan,
                               'status': "1",
                             });
+
+                            FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(documents[index].id)
+                                .set({
+                              'tanggal': tanggal,
+                              'nama': nama,
+                              'alasan': alasan,
+                              'status': "Tidak Aktif",
+                            });
+
                             // ScaffoldMessenger.of(context).showSnackBar(
                             //   SnackBar(
                             //     content:

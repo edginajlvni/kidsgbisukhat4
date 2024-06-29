@@ -12,6 +12,7 @@ class _Minggu1State extends State<Minggu1> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('users')
       .where('jabatan', isEqualTo: 'Guru')
+      // .where('status', isEqualTo: 'Aktif')
       .snapshots();
 
   final CollectionReference usersCollection =

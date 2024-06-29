@@ -35,7 +35,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   TextEditingController nama = TextEditingController();
   TextEditingController jabatan = TextEditingController();
 
-  bool _isObscure = true;
+  // bool _isObscure = true;
 
   @override
   void dispose() {
@@ -58,7 +58,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         title:
             const Text("Tambah Data Pelayan", style: TextStyle(fontSize: 18)),
@@ -196,12 +196,12 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                       onChanged: (value) {},
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.only(left: 19),
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           "Status: ",
                           style: TextStyle(
                             fontSize: 20,
@@ -209,7 +209,7 @@ class _TambahDataPelayan extends State<TambahDataPelayan> {
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         DropdownButton<String>(
                           items: options.map((String dropDownStringItem) {
                             return DropdownMenuItem(

@@ -92,7 +92,6 @@ class _PengajuanState extends State<Pengajuan> {
                   enabled: false,
                   textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
-                    hintText: "Nama",
                   ),
                 ),
                 const SizedBox(height: 20),

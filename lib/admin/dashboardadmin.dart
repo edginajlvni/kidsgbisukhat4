@@ -169,7 +169,7 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tileColor: Color.fromARGB(255, 0, 0, 0),
+                  tileColor: const Color.fromARGB(255, 0, 0, 0),
                   leading: const Icon(
                     Icons.book,
                     color: Color.fromARGB(255, 255, 255, 255),
@@ -228,10 +228,10 @@ class _DashboardAdmin extends State<DashboardAdmin> {
                       width: 110,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(90),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Center(
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             "Keluar",
                             style: TextStyle(fontSize: 15, color: Colors.white),
