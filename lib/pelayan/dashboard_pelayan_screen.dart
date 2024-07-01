@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kidsgbisukhat4/pelayan/Berita/berita_page.dart';
-import 'package:kidsgbisukhat4/pelayan/daftarpengajuan.dart';
+import 'package:kidsgbisukhat4/pelayan/penagjuan_izin/daftarpengajuan.dart';
 import 'package:kidsgbisukhat4/pelayan/jadwalpelayanan.dart';
 import 'package:kidsgbisukhat4/pelayan/unduhbahan.dart';
 import 'package:kidsgbisukhat4/screen/loginscreen.dart';

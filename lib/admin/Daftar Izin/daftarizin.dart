@@ -52,6 +52,7 @@ class _DaftarIzinState extends State<DaftarIzin> {
                       : izin['status'] == "1"
                           ? "Disetujui"
                           : "Tidak Disetujui";
+
                   // documents[index].id;
 
                   return ListTile(
@@ -108,6 +109,16 @@ class _DaftarIzinState extends State<DaftarIzin> {
                               'nama': nama,
                               'alasan': alasan,
                               'status': "2",
+                            });
+
+                            FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(documents[index].id)
+                                .set({
+                              'tanggal': tanggal,
+                              'nama': nama,
+                              'alasan': alasan,
+                              'status': "Aktif",
                             });
                           },
                           splashRadius: 24,

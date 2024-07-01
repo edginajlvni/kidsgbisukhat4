@@ -12,7 +12,6 @@ class _Minggu1State extends State<Minggu1> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('users')
       .where('jabatan', isEqualTo: 'Guru')
-      // .where('status', isEqualTo: 'Aktif')
       .snapshots();
 
   final CollectionReference usersCollection =
@@ -27,7 +26,8 @@ class _Minggu1State extends State<Minggu1> {
   // }
   alluser() async {
     await usersCollection.get().then((value) => value.docs.map((e) {
-          if (e['jabatan'] != 'Admin') {
+          if (e['jabatan'] != 'Admin'
+          && e['status'] == 'Aktif') {
             _nama.add(e['nama']);
             setState(() {});
           }
@@ -114,7 +114,7 @@ class _Minggu1State extends State<Minggu1> {
                     "Firman Besar": _nama[3],
                     "Multimedia": _nama[4],
                     "Usher": _nama[5],
-                    "Doa": _nama[6],
+                    // "Doa": _nama[6],
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
